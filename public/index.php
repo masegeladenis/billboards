@@ -301,7 +301,7 @@
 </div>
 
 <script>
-    const API_BASE = '/announcement/api';
+    const API_BASE = '<?= rtrim(dirname(dirname($_SERVER["SCRIPT_NAME"])), "/") ?>/api';
 
     fetch(`${API_BASE}/auth.php?action=check`, { credentials: 'include' })
         .then(r => r.json()).then(d => { if (d.success) location.href = 'dashboard'; });

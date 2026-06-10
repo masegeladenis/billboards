@@ -805,7 +805,7 @@
 
 <script>
     let currentUser = null;
-    const API_BASE = '/announcement/api';
+    const API_BASE = '<?= rtrim(dirname(dirname($_SERVER["SCRIPT_NAME"])), "/") ?>/api';
 
     document.addEventListener('DOMContentLoaded', () => {
         checkAuth();
