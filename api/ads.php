@@ -108,6 +108,11 @@ if ($request_method === 'POST' && $action === 'delete' && $ad_id) {
     http_response_code($result['success'] ? 201 : 400);
     echo json_encode($result);
 
+} elseif ($request_method === 'GET' && isset($_GET['all'])) {
+    // List ads of ALL users with owner info (admin view)
+    $ad = new Advertisement();
+    echo json_encode(['success' => true, 'ads' => $ad->getAllAdsWithUsers()]);
+
 } elseif ($request_method === 'GET' && !$ad_id) {
     // List all ads for user
     $ad = new Advertisement();

@@ -43,6 +43,20 @@ class Advertisement {
         return $ads;
     }
 
+    public function getAllAdsWithUsers() {
+        if (!$this->conn) return [];
+
+        $sql = "SELECT a.*, u.name AS user_name, u.email AS user_email
+                FROM {$this->table} a
+                JOIN users u ON u.id = a.user_id
+                ORDER BY a.id DESC";
+        $res = $this->conn->query($sql);
+
+        $ads = [];
+        if ($res) while ($row = $res->fetch_assoc()) $ads[] = $row;
+        return $ads;
+    }
+
     public function getActiveAds() {
         if (!$this->conn) return [];
 
