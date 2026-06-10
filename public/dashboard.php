@@ -981,6 +981,7 @@
                     return;
                 }
 
+                console.log('rendering', ads.length, 'ads, list el:', list ? 'found' : 'NULL');
                 list.innerHTML = ads.map(ad => {
                     const hasMedia = ad.media_path && String(ad.media_path).trim() !== '';
                     const adType = ad.ad_type || 'text';
@@ -1015,6 +1016,7 @@
                         </div>
                     </div>`;
                 }).join('');
+                console.log('done rendering, cards in DOM:', document.querySelectorAll('.ad-card').length);
             })
             .catch(err => {
                 console.error('loadAds error:', err);
