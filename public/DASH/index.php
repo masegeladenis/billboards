@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en">
 
-    <head>
+    
+<head>
         
         <meta charset="utf-8" />
         <title>Dashboard | Billboard Manager</title>
@@ -11,7 +12,6 @@
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
         <!-- plugin css -->
-        <link href="assets/libs/jsvectormap/jsvectormap.min.css" rel="stylesheet" type="text/css" />
 
         <!-- Layout Js -->
         <script src="assets/js/layout.js"></script>
@@ -41,13 +41,13 @@
                           <!-- LOGO -->
                         <div class="navbar-brand-box">
                             <a href="index.php" class="logo logo-dark">
-                                <span class="logo-sm" style="font-size:20px;">📢</span>
-                                <span class="logo-lg" style="font-size:16px;font-weight:700;color:#2b3940;">📢 Billboard Manager</span>
+                                <span class="logo-sm" style="font-size:20px;">&#128226;</span>
+                                <span class="logo-lg" style="font-size:15px;font-weight:700;letter-spacing:0.3px;">&#128226; Billboard Manager</span>
                             </a>
 
                             <a href="index.php" class="logo logo-light">
-                                <span class="logo-sm" style="font-size:20px;">📢</span>
-                                <span class="logo-lg" style="font-size:16px;font-weight:700;color:#fff;">📢 Billboard Manager</span>
+                                <span class="logo-sm" style="font-size:20px;">&#128226;</span>
+                                <span class="logo-lg" style="font-size:15px;font-weight:700;letter-spacing:0.3px;">&#128226; Billboard Manager</span>
                             </a>
                         </div>
 
@@ -285,13 +285,13 @@
                  <!-- LOGO -->
                  <div class="navbar-brand-box">
                     <a href="index.php" class="logo logo-dark">
-                        <span class="logo-sm" style="font-size:20px;">📢</span>
-                        <span class="logo-lg" style="font-size:16px;font-weight:700;color:#2b3940;">📢 Billboard Manager</span>
+                        <span class="logo-sm" style="font-size:20px;">&#128226;</span>
+                        <span class="logo-lg" style="font-size:15px;font-weight:700;letter-spacing:0.3px;">&#128226; Billboard Manager</span>
                     </a>
 
                     <a href="index.php" class="logo logo-light">
-                        <span class="logo-sm" style="font-size:20px;">📢</span>
-                        <span class="logo-lg" style="font-size:16px;font-weight:700;color:#fff;">📢 Billboard Manager</span>
+                        <span class="logo-sm" style="font-size:20px;">&#128226;</span>
+                        <span class="logo-lg" style="font-size:15px;font-weight:700;letter-spacing:0.3px;">&#128226; Billboard Manager</span>
                     </a>
                 </div>
 
@@ -304,6 +304,30 @@
                     <!--- Sidemenu -->
                     <div id="sidebar-menu">
 
+                        <div class="dropdown mx-3 sidebar-user user-dropdown select-dropdown">
+                            <button type="button" class="btn btn-light w-100 waves-effect waves-light border-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar-xs rounded-circle flex-shrink-0">
+                                            <div class="avatar-title border bg-light text-primary rounded-circle text-uppercase user-sort-name">?</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-2 text-start">
+                                        <h6 class="mb-1 fw-medium user-name-text">&hellip;</h6>
+                                        <p class="font-size-13 text-muted user-name-sub-text mb-0">Billboard Manager</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end">
+                                        <i class="mdi mdi-chevron-down font-size-16"></i>
+                                    </div>
+                                </span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end w-100">
+                                <a class="dropdown-item d-flex align-items-center px-3" href="javascript:appLogout();">
+                                    <i class="mdi mdi-logout text-muted font-size-16 me-2"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </div>
+                        </div>
                         <!-- Left Menu Start -->
                         <ul class="metismenu list-unstyled" id="side-menu">
                             <li class="menu-title">Menu</li>
@@ -350,16 +374,16 @@
                 </div>
 
                 <div class="dropdown px-3 sidebar-user sidebar-user-info">
-                    <button type="button" class="btn w-100 px-0 border-0" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn w-100 px-0 border-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
                             <div class="flex-shrink-0">
                                 <div class="avatar-xs rounded-circle flex-shrink-0">
-                                    <div class="avatar-title border bg-light text-primary rounded-circle text-uppercase" id="sbUserAvatar">?</div>
+                                    <div class="avatar-title border bg-light text-primary rounded-circle text-uppercase user-sort-name">?</div>
                                 </div>
                             </div>
 
                             <div class="flex-grow-1 ms-2 text-start">
-                                <span class="ms-1 fw-medium user-name-text" id="sbUserName">…</span>
+                                <span class="ms-1 fw-medium user-name-text">&hellip;</span>
                             </div>
 
                             <div class="flex-shrink-0 text-end">
@@ -399,8 +423,23 @@
                                             </div>
                                             <div class="flex-grow-1 overflow-hidden ms-4">
                                                 <p class="text-muted text-truncate font-size-15 mb-2"> Total Users</p>
-                                                <h3 class="fs-4 flex-grow-1 mb-3" id="statUsers">—</h3>
+                                                <h3 class="fs-4 flex-grow-1 mb-3" id="statUsers">&mdash;</h3>
                                                 <p class="text-muted mb-0 text-truncate">registered accounts</p>
+                                            </div>
+                                            <div class="flex-shrink-0 align-self-start">
+                                                <div class="dropdown">
+                                                    <a class="dropdown-toggle btn-icon border rounded-circle" href="#"
+                                                        data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <i class="ri-more-2-fill text-muted font-size-16"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <a class="dropdown-item" href="#">Yearly</a>
+                                                        <a class="dropdown-item" href="#">Monthly</a>
+                                                        <a class="dropdown-item" href="#">Weekly</a>
+                                                        <a class="dropdown-item" href="#">Today</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -418,8 +457,23 @@
                                             </div>
                                             <div class="flex-grow-1 overflow-hidden ms-4">
                                                 <p class="text-muted text-truncate font-size-15 mb-2"> Announcements</p>
-                                                <h3 class="fs-4 flex-grow-1 mb-3" id="statAds">—</h3>
-                                                <p class="text-muted mb-0 text-truncate"><span class="badge bg-subtle-success text-success font-size-12 fw-normal me-1" id="statAdsActive">—</span> currently active</p>
+                                                <h3 class="fs-4 flex-grow-1 mb-3" id="statAds">&mdash;</h3>
+                                                <p class="text-muted mb-0 text-truncate"><span class="badge bg-subtle-success text-success font-size-12 fw-normal me-1" id="statAdsActive">&mdash;</span> currently active</p>
+                                            </div>
+                                            <div class="flex-shrink-0 align-self-start">
+                                                <div class="dropdown">
+                                                    <a class="dropdown-toggle btn-icon border rounded-circle" href="#"
+                                                        data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <i class="ri-more-2-fill text-muted font-size-16"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <a class="dropdown-item" href="#">Yearly</a>
+                                                        <a class="dropdown-item" href="#">Monthly</a>
+                                                        <a class="dropdown-item" href="#">Weekly</a>
+                                                        <a class="dropdown-item" href="#">Today</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -437,8 +491,23 @@
                                             </div>
                                             <div class="flex-grow-1 overflow-hidden ms-4">
                                                 <p class="text-muted text-truncate font-size-15 mb-2"> Connected Billboards</p>
-                                                <h3 class="fs-4 flex-grow-1 mb-3" id="statDisplays">—</h3>
+                                                <h3 class="fs-4 flex-grow-1 mb-3" id="statDisplays">&mdash;</h3>
                                                 <p class="text-muted mb-0 text-truncate">screens online now</p>
+                                            </div>
+                                            <div class="flex-shrink-0 align-self-start">
+                                                <div class="dropdown">
+                                                    <a class="dropdown-toggle btn-icon border rounded-circle" href="#"
+                                                        data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <i class="ri-more-2-fill text-muted font-size-16"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <a class="dropdown-item" href="#">Yearly</a>
+                                                        <a class="dropdown-item" href="#">Monthly</a>
+                                                        <a class="dropdown-item" href="#">Weekly</a>
+                                                        <a class="dropdown-item" href="#">Today</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -456,8 +525,23 @@
                                             </div>
                                             <div class="flex-grow-1 overflow-hidden ms-4">
                                                 <p class="text-muted text-truncate font-size-15 mb-2"> Active Air Time</p>
-                                                <h3 class="fs-4 flex-grow-1 mb-3" id="statHours">—</h3>
+                                                <h3 class="fs-4 flex-grow-1 mb-3" id="statHours">&mdash;</h3>
                                                 <p class="text-muted mb-0 text-truncate">scheduled hours across active ads</p>
+                                            </div>
+                                            <div class="flex-shrink-0 align-self-start">
+                                                <div class="dropdown">
+                                                    <a class="dropdown-toggle btn-icon border rounded-circle" href="#"
+                                                        data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <i class="ri-more-2-fill text-muted font-size-16"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <a class="dropdown-item" href="#">Yearly</a>
+                                                        <a class="dropdown-item" href="#">Monthly</a>
+                                                        <a class="dropdown-item" href="#">Weekly</a>
+                                                        <a class="dropdown-item" href="#">Today</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -471,6 +555,20 @@
                                 <div class="card">
                                     <div class="card-header border-0 align-items-center d-flex pb-0">
                                         <h4 class="card-title mb-0 flex-grow-1">Advertisement Schedule Coverage</h4>
+                                        <div>
+                                            <button type="button" class="btn btn-soft-secondary btn-sm">
+                                                ALL
+                                            </button>
+                                            <button type="button" class="btn btn-soft-secondary btn-sm">
+                                                1M
+                                            </button>
+                                            <button type="button" class="btn btn-soft-secondary btn-sm">
+                                                6M
+                                            </button>
+                                            <button type="button" class="btn btn-soft-primary btn-sm">
+                                                1Y
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="card-body">
                                         <div class="row align-items-center">
@@ -488,16 +586,16 @@
                             <div class="col-xl-4">
                                 <div class="card">
                                     <div class="card-header border-0 align-items-center d-flex pb-1">
-                                        <h4 class="card-title mb-0 flex-grow-1">Recent Announcements</h4>
+                                        <h4 class="card-title mb-0 flex-grow-1">Top Users</h4>
                                         <div>
-                                            <a href="../dashboard.php" class="btn btn-soft-primary btn-sm">Manage Ads</a>
+                                            <a href="announcements.php" class="btn btn-soft-primary btn-sm">View Ads</a>
                                         </div>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive" data-simplebar style="max-height: 346px;">
                                             <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
-                                                <tbody id="recentAdsBody">
-                                                    <tr><td class="text-center text-muted">Loading…</td></tr>
+                                                <tbody id="topUsersBody">
+                                                    <tr><td class="text-center text-muted py-4">Loading...</td></tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -507,6 +605,41 @@
                         </div>
                         <!-- END ROW -->
 
+
+                        <div class="row">
+                           <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-header border-0 align-items-center d-flex pb-0">
+                                        <h4 class="card-title mb-0 flex-grow-1">Latest Announcements</h4>
+                                        <div>
+                                            <a href="announcements.php" class="btn btn-soft-primary btn-sm">View All</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table align-middle table-centered table-nowrap mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Announcement</th>
+                                                        <th scope="col">Owner</th>
+                                                        <th scope="col">Type</th>
+                                                        <th scope="col">Air Time</th>
+                                                        <th scope="col">Duration</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">Created</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="latestAdsBody">
+                                                    <tr><td colspan="8" class="text-center text-muted py-4">Loading...</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                           </div>
+                        </div>
+                         <!-- END ROW -->
 
                     </div>
                     <!-- container-fluid -->
@@ -519,6 +652,7 @@
                             <div class="col-sm-6">
                                 <script>document.write(new Date().getFullYear())</script> © Billboard Manager.
                             </div>
+                            
                         </div>
                     </div>
                 </footer>
@@ -594,6 +728,9 @@
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 
+        <!-- Vector map-->
+
+
         <!-- App js -->
         <script src="assets/js/app.js"></script>
 
@@ -608,14 +745,15 @@
                 return `${h % 12 || 12}:${p[1]} ${h >= 12 ? 'PM' : 'AM'}`;
             };
 
-            // Require login
+            // Require login + personalize sidebar user blocks
             fetch(`${API_BASE}/auth.php?action=check`, { credentials: 'include' })
                 .then(r => r.json())
                 .then(d => {
                     if (!d.success) { location.href = 'auth-login.php'; return; }
                     const name = d.user.name || d.user.email;
-                    document.getElementById('sbUserName').textContent = name;
-                    document.getElementById('sbUserAvatar').textContent = name[0].toUpperCase();
+                    document.querySelectorAll('.user-name-text').forEach(el => el.textContent = name);
+                    document.querySelectorAll('.user-sort-name').forEach(el => el.textContent = name[0].toUpperCase());
+                    document.querySelectorAll('.user-name-sub-text').forEach(el => el.textContent = d.user.email);
                 })
                 .catch(() => {});
 
@@ -623,6 +761,15 @@
                 fetch(`${API_BASE}/auth.php?action=logout`, { method: 'POST', credentials: 'include' })
                     .then(() => location.href = 'auth-login.php');
             }
+
+            const typeBadge = {
+                text:  '<span class="badge bg-subtle-primary text-primary font-size-12">TEXT</span>',
+                image: '<span class="badge bg-subtle-success text-success font-size-12">IMAGE</span>',
+                video: '<span class="badge bg-subtle-warning text-warning font-size-12">VIDEO</span>'
+            };
+            const statusBadge = a => a.is_active == 1
+                ? '<span class="badge badge-soft-success font-size-12">Active</span>'
+                : '<span class="badge badge-soft-danger font-size-12">Inactive</span>';
 
             fetch(`${API_BASE}/stats.php`, { credentials: 'include' })
                 .then(r => r.json())
@@ -635,24 +782,40 @@
                     document.getElementById('statDisplays').textContent = s.displays;
                     document.getElementById('statHours').textContent = s.active_hours + ' hrs';
 
-                    // Recent announcements list
-                    const typeIcon = { text: '📝', image: '🖼️', video: '🎬' };
-                    const rows = (s.recent_ads || []).map(a => `
+                    // Top users
+                    const tu = document.getElementById('topUsersBody');
+                    tu.innerHTML = (s.top_users || []).map(u => `
                         <tr>
-                            <td style="width:36px;font-size:20px;">${typeIcon[a.ad_type] || '📄'}</td>
-                            <td>
-                                <h6 class="font-size-15 mb-1">${esc(a.title)}</h6>
-                                <p class="text-muted mb-0 font-size-13">${(a.ad_type || '').toUpperCase()} · ${a.duration || 10}s per slide</p>
+                            <td style="width:20px;">
+                                <div class="avatar-sm">
+                                    <span class="avatar-title bg-subtle-primary text-primary rounded-circle font-size-16">${esc((u.name || '?')[0].toUpperCase())}</span>
+                                </div>
                             </td>
-                            <td class="text-muted font-size-13">${fmtTime(a.start_time)} — ${fmtTime(a.end_time)}</td>
-                            <td>${a.is_active == 1
-                                ? '<span class="badge badge-soft-success font-size-12">Active</span>'
-                                : '<span class="badge badge-soft-danger font-size-12">Inactive</span>'}</td>
-                        </tr>`).join('');
-                    document.getElementById('recentAdsBody').innerHTML =
-                        rows || '<tr><td class="text-center text-muted py-4">No announcements yet</td></tr>';
+                            <td>
+                                <h6 class="font-size-15 mb-1">${esc(u.name)}</h6>
+                                <p class="text-muted mb-0 font-size-14">${esc(u.email)}</p>
+                            </td>
+                            <td class="text-muted text-end">${u.ads_count} ads</td>
+                        </tr>`).join('') || '<tr><td class="text-center text-muted py-4">No users yet</td></tr>';
 
-                    // Column chart — how many active ads cover each hour of the day
+                    // Latest announcements
+                    const la = document.getElementById('latestAdsBody');
+                    la.innerHTML = (s.recent_ads || []).map((a, i) => `
+                        <tr>
+                            <td class="text-muted">${i + 1}</td>
+                            <td><h6 class="font-size-15 mb-0">${esc(a.title)}</h6></td>
+                            <td>
+                                <h6 class="font-size-14 mb-1">${esc(a.user_name || '')}</h6>
+                                <p class="text-muted mb-0 font-size-13">${esc(a.user_email || '')}</p>
+                            </td>
+                            <td>${typeBadge[a.ad_type] || a.ad_type}</td>
+                            <td class="text-muted">${fmtTime(a.start_time)} &mdash; ${fmtTime(a.end_time)}</td>
+                            <td class="text-muted">${a.duration || 10}s</td>
+                            <td>${statusBadge(a)}</td>
+                            <td class="text-muted font-size-13">${(a.created_at || '').split(' ')[0]}</td>
+                        </tr>`).join('') || '<tr><td colspan="8" class="text-center text-muted py-4">No announcements yet</td></tr>';
+
+                    // Column chart: active ads per hour of day
                     new ApexCharts(document.querySelector('#column-chart'), {
                         chart: { type: 'bar', height: 350, toolbar: { show: false } },
                         series: [{ name: 'Active ads on air', data: s.ads_by_hour }],
@@ -664,7 +827,7 @@
                         grid: { borderColor: '#f1f1f1' }
                     }).render();
 
-                    // Donut — ads by type
+                    // Donut: ads by type
                     new ApexCharts(document.querySelector('#donut-chart'), {
                         chart: { type: 'donut', height: 280 },
                         series: [s.ads_by_type.text || 0, s.ads_by_type.image || 0, s.ads_by_type.video || 0],

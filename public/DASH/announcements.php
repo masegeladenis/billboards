@@ -79,6 +79,30 @@
                     <!--- Sidemenu -->
                     <div id="sidebar-menu">
 
+                        <div class="dropdown mx-3 sidebar-user user-dropdown select-dropdown">
+                            <button type="button" class="btn btn-light w-100 waves-effect waves-light border-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar-xs rounded-circle flex-shrink-0">
+                                            <div class="avatar-title border bg-light text-primary rounded-circle text-uppercase user-sort-name">?</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-2 text-start">
+                                        <h6 class="mb-1 fw-medium user-name-text">&hellip;</h6>
+                                        <p class="font-size-13 text-muted user-name-sub-text mb-0">Billboard Manager</p>
+                                    </div>
+                                    <div class="flex-shrink-0 text-end">
+                                        <i class="mdi mdi-chevron-down font-size-16"></i>
+                                    </div>
+                                </span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end w-100">
+                                <a class="dropdown-item d-flex align-items-center px-3" href="javascript:appLogout();">
+                                    <i class="mdi mdi-logout text-muted font-size-16 me-2"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </div>
+                        </div>
                         <!-- Left Menu Start -->
                         <ul class="metismenu list-unstyled" id="side-menu">
                             <li class="menu-title">Menu</li>
@@ -129,12 +153,12 @@
                         <span class="d-flex align-items-center">
                             <div class="flex-shrink-0">
                                 <div class="avatar-xs rounded-circle flex-shrink-0">
-                                    <div class="avatar-title border bg-light text-primary rounded-circle text-uppercase" id="sbUserAvatar">?</div>
+                                    <div class="avatar-title border bg-light text-primary rounded-circle text-uppercase user-sort-name">?</div>
                                 </div>
                             </div>
 
                             <div class="flex-grow-1 ms-2 text-start">
-                                <span class="ms-1 fw-medium user-name-text" id="sbUserName">…</span>
+                                <span class="ms-1 fw-medium user-name-text">…</span>
                             </div>
 
                             <div class="flex-shrink-0 text-end">
@@ -244,8 +268,9 @@
                 .then(d => {
                     if (!d.success) { location.href = 'auth-login.php'; return; }
                     const name = d.user.name || d.user.email;
-                    document.getElementById('sbUserName').textContent = name;
-                    document.getElementById('sbUserAvatar').textContent = name[0].toUpperCase();
+                    document.querySelectorAll('.user-name-text').forEach(el => el.textContent = name);
+                    document.querySelectorAll('.user-sort-name').forEach(el => el.textContent = name[0].toUpperCase());
+                    document.querySelectorAll('.user-name-sub-text').forEach(el => el.textContent = d.user.email);
                 })
                 .catch(() => {});
 

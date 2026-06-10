@@ -67,11 +67,24 @@ if ($r) {
 }
 $out['ads_by_hour'] = $hours;
 
-// Latest announcements
+// Latest announcements (with owner info)
 $out['recent_ads'] = [];
-$r = $conn->query("SELECT id, title, ad_type, start_time, end_time, is_active, duration, created_at
-                   FROM advertisements ORDER BY id DESC LIMIT 6");
+$r = $conn->query("SELECT a.id, a.title, a.ad_type, a.start_time, a.end_time, a.is_active, a.duration, a.created_at,
+                          u.name AS user_name, u.email AS user_email
+                   FROM advertisements a
+                   JOIN users u ON u.id = a.user_id
+                   ORDER BY a.id DESC LIMIT 8");
 if ($r) while ($x = $r->fetch_assoc()) $out['recent_ads'][] = $x;
+
+// Top users by number of announcements
+$out['top_users'] = [];
+$r = $conn->query("SELECT u.name, u.email, COUNT(a.id) AS ads_count
+                   FROM users u
+                   LEFT JOIN advertisements a ON a.user_id = u.id
+                   GROUP BY u.id
+                   ORDER BY ads_count DESC, u.id ASC
+                   LIMIT 6");
+if ($r) while ($x = $r->fetch_assoc()) $out['top_users'][] = $x;
 
 echo json_encode($out);
 ?>
