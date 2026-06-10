@@ -31,7 +31,7 @@
                             <div class="w-100">
                                 <div class="d-flex flex-column h-100 py-0 py-xl-3">
                                     <div class="text-center mb-4">
-                                        <a href="index.html" class="text-decoration-none">
+                                        <a href="index.php" class="text-decoration-none">
                                             <h3 class="fw-bold text-dark mb-0">📢 Billboard Manager</h3>
                                         </a>
                                         <p class="text-muted mt-2">Billboard Advertisement Management System</p>
@@ -83,7 +83,7 @@
                                                         </div>
                                                     
                                                         <div class="mt-4 text-center">
-                                                            <p class="mb-0">Already have an account ? <a href="auth-login.html" class="fw-medium text-primary"> Login</a> </p>
+                                                            <p class="mb-0">Already have an account ? <a href="auth-login.php" class="fw-medium text-primary"> Login</a> </p>
                                                         </div>
                                                     </div>
                                                 </div>  
@@ -153,7 +153,7 @@
                             body: JSON.stringify({ email, password })
                         }).then(r => r.json());
 
-                        location.href = login.success ? 'index.html' : 'auth-login.html';
+                        location.href = login.success ? 'index.php' : 'auth-login.php';
                     } else {
                         alertBox.textContent = data.message || 'Registration failed';
                         alertBox.classList.remove('d-none');
@@ -170,5 +170,4 @@
 
     </body>
 
-<!-- Mirrored from themesdesign.in/tocly/layouts/auth-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2026 16:41:51 GMT -->
 </html>

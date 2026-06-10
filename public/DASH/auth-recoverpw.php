@@ -2,7 +2,6 @@
 <html lang="en">
 
     
-<!-- Mirrored from themesdesign.in/tocly/layouts/auth-recoverpw.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2026 16:41:51 GMT -->
 <head>
         
         <meta charset="utf-8" />
@@ -36,7 +35,7 @@
                             <div class="w-100">
                                 <div class="d-flex flex-column h-100 py-0 py-xl-3">
                                     <div class="text-center mb-4">
-                                        <a href="index.html" class="text-decoration-none">
+                                        <a href="index.php" class="text-decoration-none">
                                             <h3 class="fw-bold text-dark mb-0">📢 Billboard Manager</h3>
                                         </a>
                                         <p class="text-muted mt-2">Billboard Advertisement Management System</p>
@@ -58,25 +57,35 @@
                                                                 <p class="text-muted">Reset your Billboard Manager password.</p>
                                                             </div>
 
-                                                            <div class="alert alert-success mt-4 pt-2" role="alert">
+                                                            <div class="alert alert-success mt-4 pt-2" id="recoverInfo" role="alert">
                                                                 Enter your Email and instructions will be sent to you!
                                                             </div>
-            
-                                                            <form action="https://themesdesign.in/tocly/layouts/index.html" class="auth-input">
+
+                                                            <form id="recoverForm" class="auth-input">
                                                                 <div class="mb-2">
                                                                     <label for="useremail" class="form-label">Email</label>
-                                                                    <input type="email" class="form-control" id="useremail" placeholder="Enter email">
+                                                                    <input type="email" class="form-control" id="useremail" placeholder="Enter email" required>
                                                                 </div>
-                                                    
+
                                                                 <div class="mt-4">
                                                                     <button class="btn btn-primary w-100" type="submit">Reset</button>
                                                                 </div>
-                                                    
+
                                                             </form>
+
+                                                            <script>
+                                                                document.getElementById('recoverForm').addEventListener('submit', e => {
+                                                                    e.preventDefault();
+                                                                    const info = document.getElementById('recoverInfo');
+                                                                    info.classList.remove('alert-success');
+                                                                    info.classList.add('alert-warning');
+                                                                    info.textContent = 'Password reset by email is not available yet. Please contact your system administrator to reset your password.';
+                                                                });
+                                                            </script>
                                                         </div>
                                                     
                                                         <div class="mt-4 text-center">
-                                                            <p class="mb-0">Remember your password ? <a href="auth-login.html" class="fw-medium text-primary"> Log in </a> </p>
+                                                            <p class="mb-0">Remember your password ? <a href="auth-login.php" class="fw-medium text-primary"> Log in </a> </p>
                                                         </div>
                                                     </div>
                                                 </div>  
@@ -111,5 +120,4 @@
 
     </body>
 
-<!-- Mirrored from themesdesign.in/tocly/layouts/auth-recoverpw.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2026 16:41:51 GMT -->
 </html>

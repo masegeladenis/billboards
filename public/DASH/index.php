@@ -40,7 +40,7 @@
                     <div class="d-flex">
                           <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
+                            <a href="index.php" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="assets/images/logo-dark.png" alt="logo-sm-dark" height="24">
                                 </span>
@@ -49,7 +49,7 @@
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light">
+                            <a href="index.php" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="assets/images/logo-light.png" alt="logo-sm-light" height="24">
                                 </span>
@@ -292,7 +292,7 @@
 
                  <!-- LOGO -->
                  <div class="navbar-brand-box">
-                    <a href="index.html" class="logo logo-dark">
+                    <a href="index.php" class="logo logo-dark">
                         <span class="logo-sm">
                             <img src="assets/images/logo-sm-dark.png" alt="logo-sm-dark" height="24">
                         </span>
@@ -301,7 +301,7 @@
                         </span>
                     </a>
 
-                    <a href="index.html" class="logo logo-light">
+                    <a href="index.php" class="logo logo-light">
                         <span class="logo-sm">
                             <img src="assets/images/logo-sm-light.png" alt="logo-sm-light" height="24">
                         </span>
@@ -396,7 +396,7 @@
                             <li class="menu-title">Menu</li>
 
                             <li>
-                                <a href="index.html" class="waves-effect">
+                                <a href="index.php" class="waves-effect">
                                     <i class="uim uim-airplay"></i><span class="badge rounded-pill bg-success float-end">3</span>
                                     <span>Dashboard</span>
                                 </a>
@@ -481,9 +481,9 @@
                                     <span>Authentication</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="auth-login.html">Login</a></li>
-                                    <li><a href="auth-register.html">Register</a></li>
-                                    <li><a href="auth-recoverpw.html">Recover Password</a></li>
+                                    <li><a href="auth-login.php">Login</a></li>
+                                    <li><a href="auth-register.php">Register</a></li>
+                                    <li><a href="auth-recoverpw.php">Recover Password</a></li>
                                     <li><a href="auth-lock-screen.html">Lock Screen</a></li>
                                 </ul>
                             </li>
@@ -912,7 +912,7 @@
             // Require login
             fetch(`${API_BASE}/auth.php?action=check`, { credentials: 'include' })
                 .then(r => r.json())
-                .then(d => { if (!d.success) location.href = 'auth-login.html'; })
+                .then(d => { if (!d.success) location.href = 'auth-login.php'; })
                 .catch(() => {});
 
             fetch(`${API_BASE}/stats.php`, { credentials: 'include' })
@@ -970,5 +970,4 @@
     </body>
 
 
-<!-- Mirrored from themesdesign.in/tocly/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2026 16:40:22 GMT -->
 </html>

@@ -33,7 +33,7 @@
                             <div class="w-100">
                                 <div class="d-flex flex-column h-100 py-0 py-xl-3">
                                     <div class="text-center mb-4">
-                                        <a href="index.html" class="text-decoration-none">
+                                        <a href="index.php" class="text-decoration-none">
                                             <h3 class="fw-bold text-dark mb-0">📢 Billboard Manager</h3>
                                         </a>
                                         <p class="text-muted mt-2">Billboard Advertisement Management System</p>
@@ -66,9 +66,12 @@
                                                                     <label class="form-label" for="password-input">Password</label>
                                                                     <input type="password" class="form-control" id="password-input" placeholder="Enter password" required>
                                                                 </div>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" value="" id="auth-remember-check">
-                                                                    <label class="form-check-label" for="auth-remember-check">Remember me</label>
+                                                                <div class="d-flex align-items-center justify-content-between">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="" id="auth-remember-check">
+                                                                        <label class="form-check-label" for="auth-remember-check">Remember me</label>
+                                                                    </div>
+                                                                    <a href="auth-recoverpw.php" class="text-muted font-size-13">Forgot password?</a>
                                                                 </div>
                                                                 <div class="mt-3">
                                                                     <button class="btn btn-primary w-100" type="submit" id="loginBtn">Sign In</button>
@@ -77,7 +80,7 @@
                                                         </div>
                                                     
                                                         <div class="mt-4 text-center">
-                                                            <p class="mb-0">Don't have an account ? <a href="auth-register.html" class="fw-medium text-primary"> Register </a> </p>
+                                                            <p class="mb-0">Don't have an account ? <a href="auth-register.php" class="fw-medium text-primary"> Register </a> </p>
                                                         </div>
                                                     </div>
                                                 </div>  
@@ -117,7 +120,7 @@
             // Already signed in? Go straight to the dashboard.
             fetch(`${API_BASE}/auth.php?action=check`, { credentials: 'include' })
                 .then(r => r.json())
-                .then(d => { if (d.success) location.href = 'index.html'; })
+                .then(d => { if (d.success) location.href = 'index.php'; })
                 .catch(() => {});
 
             document.getElementById('loginForm').addEventListener('submit', async e => {
@@ -141,7 +144,7 @@
                     const data = await res.json();
 
                     if (data.success) {
-                        location.href = 'index.html';
+                        location.href = 'index.php';
                     } else {
                         alertBox.textContent = data.message || 'Incorrect email or password';
                         alertBox.classList.remove('d-none');
@@ -158,5 +161,4 @@
 
     </body>
 
-<!-- Mirrored from themesdesign.in/tocly/layouts/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jun 2026 16:41:51 GMT -->
 </html>
