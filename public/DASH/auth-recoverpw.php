@@ -68,18 +68,38 @@
                                                                 </div>
 
                                                                 <div class="mt-4">
-                                                                    <button class="btn btn-primary w-100" type="submit">Reset</button>
+                                                                    <button class="btn btn-primary w-100" type="submit" id="recoverBtn">Send Reset Link</button>
                                                                 </div>
 
                                                             </form>
 
                                                             <script>
-                                                                document.getElementById('recoverForm').addEventListener('submit', e => {
+                                                                document.getElementById('recoverForm').addEventListener('submit', async e => {
                                                                     e.preventDefault();
+                                                                    const API_BASE = location.pathname.replace(/\/public\/DASH\/.*$/, '') + '/api';
                                                                     const info = document.getElementById('recoverInfo');
-                                                                    info.classList.remove('alert-success');
-                                                                    info.classList.add('alert-warning');
-                                                                    info.textContent = 'Password reset by email is not available yet. Please contact your system administrator to reset your password.';
+                                                                    const btn = document.getElementById('recoverBtn');
+                                                                    btn.disabled = true;
+                                                                    btn.textContent = 'Sending…';
+
+                                                                    try {
+                                                                        const res = await fetch(`${API_BASE}/password-reset.php?action=forgot`, {
+                                                                            method: 'POST',
+                                                                            headers: { 'Content-Type': 'application/json' },
+                                                                            body: JSON.stringify({ email: document.getElementById('useremail').value })
+                                                                        });
+                                                                        const data = await res.json();
+                                                                        info.classList.remove('alert-success', 'alert-warning', 'alert-danger');
+                                                                        info.classList.add(data.success ? 'alert-success' : 'alert-danger');
+                                                                        info.textContent = data.message;
+                                                                    } catch {
+                                                                        info.classList.remove('alert-success');
+                                                                        info.classList.add('alert-danger');
+                                                                        info.textContent = 'Connection error. Please try again.';
+                                                                    } finally {
+                                                                        btn.disabled = false;
+                                                                        btn.textContent = 'Send Reset Link';
+                                                                    }
                                                                 });
                                                             </script>
                                                         </div>

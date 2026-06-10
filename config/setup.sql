@@ -67,3 +67,12 @@ CREATE TABLE IF NOT EXISTS display_heartbeats (
     id        VARCHAR(64) PRIMARY KEY,   -- hash of screen IP + user agent
     last_seen DATETIME NOT NULL          -- screens seen in last 2 min count as online
 );
+
+-- ------------------------------------------------------------
+--  Password Resets  (single-use, 1-hour expiry tokens)
+-- ------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS password_resets (
+    email      VARCHAR(255) PRIMARY KEY,
+    token_hash VARCHAR(64)  NOT NULL,
+    expires_at DATETIME     NOT NULL
+);
