@@ -1,13 +1,14 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /announcement/
-    
-    # Prevent access to hidden files and directories
+
+    # Block dotfiles
     RewriteRule "^\." - [F]
-    
-    # Allow access to public directory
-    RewriteCond %{REQUEST_URI} ^/announcement/public/ [OR]
-    RewriteCond %{REQUEST_URI} ^/announcement/api/ [OR]
-    RewriteCond %{REQUEST_URI} ^/announcement/uploads/
+
+    # Redirect bare root to public/
+    RewriteRule ^$ public/ [R=302,L]
+
+    # Pass through real files and directories
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
 </IfModule>

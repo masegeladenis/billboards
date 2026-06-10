@@ -1,16 +1,17 @@
 Options -MultiViews
-RewriteEngine On
-RewriteBase /announcement/public/
+<IfModule mod_rewrite.c>
+    RewriteEngine On
 
-# Serve existing files/directories as-is
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
+    # Pass through real files and directories
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
 
-# Strip .php — redirect /page.php to /page
-RewriteCond %{THE_REQUEST} \s/+announcement/public/([^.]+)\.php[\s?] [NC]
-RewriteRule ^ /announcement/public/%1 [R=301,L]
+    # Redirect browser requests for .php URLs to clean URLs
+    RewriteCond %{THE_REQUEST} \s(.+?)\.php[\s?] [NC]
+    RewriteRule ^ %1 [R=301,L]
 
-# Add .php internally for extensionless requests
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^([^.]+)$ $1.php [L]
+    # Internally serve extensionless requests from .php files
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^ %{REQUEST_URI}.php [L]
+</IfModule>

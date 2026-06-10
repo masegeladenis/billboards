@@ -73,7 +73,10 @@ $filename = uniqid('ad_') . '_' . time() . '.' . pathinfo($file['name'], PATHINF
 $filepath = $upload_dir . $filename;
 
 if (move_uploaded_file($file['tmp_name'], $filepath)) {
-    $relative_path = '/announcement/uploads/' . $filename;
+    // Build URL path relative to the app root (works on any deployment path)
+    $api_dir   = dirname($_SERVER['SCRIPT_NAME']);          // e.g. /announcement/api or /api
+    $app_root  = rtrim(dirname($api_dir), '/');             // e.g. /announcement or ''
+    $relative_path = $app_root . '/uploads/' . $filename;
     echo json_encode([
         'success' => true,
         'message' => 'File uploaded successfully',
