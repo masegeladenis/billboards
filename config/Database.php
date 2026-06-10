@@ -1,9 +1,9 @@
 <?php
 class Database {
-    private $host = 'localhost';
-    private $db_name = 'billboard_db';
-    private $user = 'root';
-    private $password = '';
+    private $host = '161.35.43.5';
+    private $db_name = 'mqfkpcnfdx';
+    private $user = 'mqfkpcnfdx';
+    private $password = 'B58vp4Ha6y';
     private $conn;
     public $error = null;
 
