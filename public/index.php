@@ -304,7 +304,7 @@
     const API_BASE = '<?= rtrim(dirname(dirname($_SERVER["SCRIPT_NAME"])), "/") ?>/api';
 
     fetch(`${API_BASE}/auth.php?action=check`, { credentials: 'include' })
-        .then(r => r.json()).then(d => { if (d.success) location.href = 'dashboard'; });
+        .then(r => r.json()).then(d => { if (d.success) location.href = 'dashboard.php'; });
 
     function switchTab(tab, btn) {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -342,7 +342,7 @@
 
             if (data.success) {
                 showToast('Welcome back! Redirecting…', 'success');
-                setTimeout(() => location.href = 'dashboard', 900);
+                setTimeout(() => location.href = 'dashboard.php', 900);
             } else {
                 showToast(data.message || 'Incorrect email or password', 'error');
                 setLoading('login', false, 'Sign In');
@@ -378,7 +378,7 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ email: registerEmail.value, password: registerPassword.value })
                     }).then(r => r.json());
-                    if (login.success) location.href = 'dashboard';
+                    if (login.success) location.href = 'dashboard.php';
                 }, 800);
             } else {
                 showToast(data.message || 'Registration failed', 'error');

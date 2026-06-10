@@ -823,7 +823,7 @@
                     const initial = (data.user.name || data.user.email || '?')[0].toUpperCase();
                     document.getElementById('userAvatar').textContent = initial;
                 } else {
-                    location.href = 'index';
+                    location.href = 'index.php';
                 }
             });
     }
@@ -946,16 +946,23 @@
     }
 
     function loadAds() {
+        const fmt = t => {
+            if (!t) return '--:--';
+            const parts = String(t).split(':');
+            const hh = parseInt(parts[0], 10);
+            const mm = parts[1] || '00';
+            return `${hh % 12 || 12}:${mm} ${hh >= 12 ? 'PM' : 'AM'}`;
+        };
+
         fetch(`${API_BASE}/ads.php`, { method: 'GET', credentials: 'include' })
             .then(r => r.json())
             .then(data => {
                 const list = document.getElementById('adsList');
                 const ads = data.ads || [];
 
-                // Stats
                 document.getElementById('statTotal').textContent = ads.length;
-                document.getElementById('statActive').textContent = ads.filter(a => a.is_active).length;
-                document.getElementById('statInactive').textContent = ads.filter(a => !a.is_active).length;
+                document.getElementById('statActive').textContent = ads.filter(a => a.is_active == 1).length;
+                document.getElementById('statInactive').textContent = ads.filter(a => a.is_active != 1).length;
 
                 if (ads.length === 0) {
                     list.innerHTML = `
@@ -968,39 +975,44 @@
                 }
 
                 list.innerHTML = ads.map(ad => {
-                    const hasMedia = ad.media_path && ad.media_path.trim() !== '';
-                    const typeIcon = { text: '📝', image: '🖼️', video: '🎬' }[ad.ad_type] || '📄';
-                    const mediaLabel = ad.ad_type === 'text'
+                    const hasMedia = ad.media_path && String(ad.media_path).trim() !== '';
+                    const adType = ad.ad_type || 'text';
+                    const typeIcon = { text: '📝', image: '🖼️', video: '🎬' }[adType] || '📄';
+                    const mediaLabel = adType === 'text'
                         ? '<span class="badge badge-text">📝 Text content</span>'
                         : hasMedia
                             ? '<span class="badge badge-media-ok">✓ Media attached</span>'
                             : '<span class="badge badge-media-no">✕ No media</span>';
-                    const fmt = t => { const [h, m] = t.split(':'); const hh = +h; return `${hh % 12 || 12}:${m} ${hh >= 12 ? 'PM' : 'AM'}`; };
 
                     return `
                     <div class="ad-card" id="adcard-${ad.id}">
                         <div class="ad-card-top">
                             <div class="ad-title-row">
-                                <div class="ad-title">${escHtml(ad.title)}</div>
+                                <div class="ad-title">${escHtml(ad.title || '')}</div>
                                 <div class="ad-time">⏰ ${fmt(ad.start_time)} — ${fmt(ad.end_time)} &nbsp;·&nbsp; ⏱ ${ad.duration || 10}s</div>
                             </div>
-                            <span class="status-pill ${ad.is_active ? 'status-active' : 'status-inactive'}">
-                                ${ad.is_active ? 'Active' : 'Inactive'}
+                            <span class="status-pill ${ad.is_active == 1 ? 'status-active' : 'status-inactive'}">
+                                ${ad.is_active == 1 ? 'Active' : 'Inactive'}
                             </span>
                         </div>
                         <div class="ad-badges">
-                            <span class="badge badge-type">${typeIcon} ${ad.ad_type.toUpperCase()}</span>
+                            <span class="badge badge-type">${typeIcon} ${adType.toUpperCase()}</span>
                             ${mediaLabel}
                         </div>
                         <div class="ad-actions" id="actions-${ad.id}">
-                            <button class="btn-sm ${ad.is_active ? 'btn-deactivate' : 'btn-activate'}"
+                            <button class="btn-sm ${ad.is_active == 1 ? 'btn-deactivate' : 'btn-activate'}"
                                     onclick="toggleAd(${ad.id})">
-                                ${ad.is_active ? '⏸ Deactivate' : '▶ Activate'}
+                                ${ad.is_active == 1 ? '⏸ Deactivate' : '▶ Activate'}
                             </button>
                             <button class="btn-sm btn-del" onclick="confirmDelete(${ad.id})">🗑 Delete</button>
                         </div>
                     </div>`;
                 }).join('');
+            })
+            .catch(err => {
+                console.error('loadAds error:', err);
+                document.getElementById('adsList').innerHTML =
+                    `<div class="empty-state"><div class="empty-title">Failed to load ads</div><div class="empty-sub">${err.message}</div></div>`;
             });
     }
 
@@ -1037,7 +1049,7 @@
 
     function logout() {
         fetch(`${API_BASE}/auth.php?action=logout`, { method: 'POST', credentials: 'include' })
-            .then(() => location.href = 'index');
+            .then(() => location.href = 'index.php');
     }
 
     let toastTimer;
