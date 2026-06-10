@@ -19,8 +19,6 @@
         <!-- App Css-->
         <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
-
-
     </head>
 
     <body>

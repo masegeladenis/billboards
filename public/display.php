@@ -5,6 +5,23 @@ ini_set('display_errors', 0);
 try {
     require_once __DIR__ . '/../config/Database.php';
     require_once __DIR__ . '/../models/Advertisement.php';
+
+    // Heartbeat: register this screen so the dashboard can count connected billboards.
+    // The page reloads every 60s, so a fresh heartbeat means the screen is live.
+    try {
+        $hb_db = new Database();
+        $hb = $hb_db->connect();
+        if ($hb) {
+            $hb->query("CREATE TABLE IF NOT EXISTS display_heartbeats (
+                id VARCHAR(64) PRIMARY KEY,
+                last_seen DATETIME NOT NULL
+            )");
+            $screen_id = md5(($_SERVER['REMOTE_ADDR'] ?? '') . '|' . ($_SERVER['HTTP_USER_AGENT'] ?? ''));
+            $stmt = $hb->prepare("REPLACE INTO display_heartbeats (id, last_seen) VALUES (?, NOW())");
+            if ($stmt) { $stmt->bind_param('s', $screen_id); $stmt->execute(); }
+        }
+    } catch (Exception $e) { /* heartbeat is best-effort */ }
+
     $ad = new Advertisement();
 
     // ?preview=1 shows ALL active ads regardless of time/day — useful for testing

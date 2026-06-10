@@ -59,3 +59,11 @@ CREATE TABLE IF NOT EXISTS schedule_details (
 --  Migration — add duration to existing installations
 -- ------------------------------------------------------------
 ALTER TABLE advertisements ADD COLUMN IF NOT EXISTS duration INT DEFAULT 10;
+
+-- ------------------------------------------------------------
+--  Display Heartbeats  (connected billboard screens)
+-- ------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS display_heartbeats (
+    id        VARCHAR(64) PRIMARY KEY,   -- hash of screen IP + user agent
+    last_seen DATETIME NOT NULL          -- screens seen in last 2 min count as online
+);

@@ -4,10 +4,9 @@
     <head>
         
         <meta charset="utf-8" />
-        <title>Dashboard | Tocly - Admin & Dashboard Template</title>
+        <title>Dashboard | Billboard Manager</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-        <meta content="Themesdesign" name="author" />
+        <meta content="Billboard Advertisement Management System" name="description" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -700,24 +699,9 @@
                                                 </span>
                                             </div>
                                             <div class="flex-grow-1 overflow-hidden ms-4">
-                                                <p class="text-muted text-truncate font-size-15 mb-2"> Total Earnings</p>
-                                                <h3 class="fs-4 flex-grow-1 mb-3">34,123.20 <span class="text-muted font-size-16">USD</span></h3>
-                                                <p class="text-muted mb-0 text-truncate"><span class="badge bg-subtle-success text-success font-size-12 fw-normal me-1"><i class="mdi mdi-arrow-top-right"></i> 2.8% Increase</span> vs last month</p>
-                                            </div>
-                                            <div class="flex-shrink-0 align-self-start">
-                                                <div class="dropdown">
-                                                    <a class="dropdown-toggle btn-icon border rounded-circle" href="#"
-                                                        data-bs-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <i class="ri-more-2-fill text-muted font-size-16"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item" href="#">Yearly</a>
-                                                        <a class="dropdown-item" href="#">Monthly</a>
-                                                        <a class="dropdown-item" href="#">Weekly</a>
-                                                        <a class="dropdown-item" href="#">Today</a>
-                                                    </div>
-                                                </div>
+                                                <p class="text-muted text-truncate font-size-15 mb-2"> Total Users</p>
+                                                <h3 class="fs-4 flex-grow-1 mb-3" id="statUsers">—</h3>
+                                                <p class="text-muted mb-0 text-truncate">registered accounts</p>
                                             </div>
                                         </div>
                                     </div>
@@ -734,24 +718,9 @@
                                                 </span>
                                             </div>
                                             <div class="flex-grow-1 overflow-hidden ms-4">
-                                                <p class="text-muted text-truncate font-size-15 mb-2"> Total Orders</p>
-                                                <h3 class="fs-4 flex-grow-1 mb-3">63,234 <span class="text-muted font-size-16">NOU</span></h3>
-                                                <p class="text-muted mb-0 text-truncate"><span class="badge bg-subtle-danger text-danger font-size-12 fw-normal me-1"><i class="mdi mdi-arrow-bottom-left"></i> 7.8% Loss</span> vs last month</p>
-                                            </div>
-                                            <div class="flex-shrink-0 align-self-start">
-                                                <div class="dropdown">
-                                                    <a class="dropdown-toggle btn-icon border rounded-circle" href="#"
-                                                        data-bs-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <i class="ri-more-2-fill text-muted font-size-16"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item" href="#">Yearly</a>
-                                                        <a class="dropdown-item" href="#">Monthly</a>
-                                                        <a class="dropdown-item" href="#">Weekly</a>
-                                                        <a class="dropdown-item" href="#">Today</a>
-                                                    </div>
-                                                </div>
+                                                <p class="text-muted text-truncate font-size-15 mb-2"> Announcements</p>
+                                                <h3 class="fs-4 flex-grow-1 mb-3" id="statAds">—</h3>
+                                                <p class="text-muted mb-0 text-truncate"><span class="badge bg-subtle-success text-success font-size-12 fw-normal me-1" id="statAdsActive">—</span> currently active</p>
                                             </div>
                                         </div>
                                     </div>
@@ -768,24 +737,9 @@
                                                 </span>
                                             </div>
                                             <div class="flex-grow-1 overflow-hidden ms-4">
-                                                <p class="text-muted text-truncate font-size-15 mb-2"> Today Visitor</p>
-                                                <h3 class="fs-4 flex-grow-1 mb-3">425,34 <span class="text-muted font-size-16">NOU</span></h3>
-                                                <p class="text-muted mb-0 text-truncate"><span class="badge bg-subtle-success text-success font-size-12 fw-normal me-1"><i class="mdi mdi-arrow-top-right"></i> 4.6% Growth</span> vs last month</p>
-                                            </div>
-                                            <div class="flex-shrink-0 align-self-start">
-                                                <div class="dropdown">
-                                                    <a class="dropdown-toggle btn-icon border rounded-circle" href="#"
-                                                        data-bs-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <i class="ri-more-2-fill text-muted font-size-16"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item" href="#">Yearly</a>
-                                                        <a class="dropdown-item" href="#">Monthly</a>
-                                                        <a class="dropdown-item" href="#">Weekly</a>
-                                                        <a class="dropdown-item" href="#">Today</a>
-                                                    </div>
-                                                </div>
+                                                <p class="text-muted text-truncate font-size-15 mb-2"> Connected Billboards</p>
+                                                <h3 class="fs-4 flex-grow-1 mb-3" id="statDisplays">—</h3>
+                                                <p class="text-muted mb-0 text-truncate">screens online now</p>
                                             </div>
                                         </div>
                                     </div>
@@ -802,24 +756,9 @@
                                                 </span>
                                             </div>
                                             <div class="flex-grow-1 overflow-hidden ms-4">
-                                                <p class="text-muted text-truncate font-size-15 mb-2"> Total Expense</p>
-                                                <h3 class="fs-4 flex-grow-1 mb-3">26,482.46 <span class="text-muted font-size-16">USD</span></h3>
-                                                <p class="text-muted mb-0 text-truncate"><span class="badge bg-subtle-success text-success font-size-12 fw-normal me-1"><i class="mdi mdi-arrow-top-right"></i> 23% Increase</span> vs last month</p>
-                                            </div>
-                                            <div class="flex-shrink-0 align-self-start">
-                                                <div class="dropdown">
-                                                    <a class="dropdown-toggle btn-icon border rounded-circle" href="#"
-                                                        data-bs-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <i class="ri-more-2-fill text-muted font-size-16"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item" href="#">Yearly</a>
-                                                        <a class="dropdown-item" href="#">Monthly</a>
-                                                        <a class="dropdown-item" href="#">Weekly</a>
-                                                        <a class="dropdown-item" href="#">Today</a>
-                                                    </div>
-                                                </div>
+                                                <p class="text-muted text-truncate font-size-15 mb-2"> Active Air Time</p>
+                                                <h3 class="fs-4 flex-grow-1 mb-3" id="statHours">—</h3>
+                                                <p class="text-muted mb-0 text-truncate">scheduled hours across active ads</p>
                                             </div>
                                         </div>
                                     </div>
@@ -832,21 +771,7 @@
                             <div class="col-xl-8">
                                 <div class="card">
                                     <div class="card-header border-0 align-items-center d-flex pb-0">
-                                        <h4 class="card-title mb-0 flex-grow-1">Audiences Metrics</h4>
-                                        <div>
-                                            <button type="button" class="btn btn-soft-secondary btn-sm">
-                                                ALL
-                                            </button>
-                                            <button type="button" class="btn btn-soft-secondary btn-sm">
-                                                1M
-                                            </button>
-                                            <button type="button" class="btn btn-soft-secondary btn-sm">
-                                                6M
-                                            </button>
-                                            <button type="button" class="btn btn-soft-primary btn-sm">
-                                                1Y
-                                            </button>
-                                        </div>
+                                        <h4 class="card-title mb-0 flex-grow-1">Advertisement Schedule Coverage</h4>
                                     </div>
                                     <div class="card-body">
                                         <div class="row align-items-center">
@@ -864,379 +789,25 @@
                             <div class="col-xl-4">
                                 <div class="card">
                                     <div class="card-header border-0 align-items-center d-flex pb-1">
-                                        <h4 class="card-title mb-0 flex-grow-1">Live Users By Country</h4>
+                                        <h4 class="card-title mb-0 flex-grow-1">Recent Announcements</h4>
                                         <div>
-                                            <button type="button" class="btn btn-soft-primary btn-sm">
-                                                Export Report
-                                            </button>
+                                            <a href="../dashboard.php" class="btn btn-soft-primary btn-sm">Manage Ads</a>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div id="world-map-markers" style="height: 346px;"></div>
+                                        <div class="table-responsive" data-simplebar style="max-height: 346px;">
+                                            <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
+                                                <tbody id="recentAdsBody">
+                                                    <tr><td class="text-center text-muted">Loading…</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- END ROW -->
 
-                        <div class="row">
-                            <div class="col-xl-7">
-                                <div class="row">
-
-                                    <div class="col-xl-6">
-                                        <div class="card">
-                                            <div class="card-header border-0 align-items-center d-flex pb-0">
-                                                <h4 class="card-title mb-0 flex-grow-1">Source of Purchases</h4>
-                                                <div>
-                                                    <div class="dropdown">
-                                                        <a class="dropdown-toggle text-reset" href="#" data-bs-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">
-                                                            <span class="fw-semibold">Sort By:</span>
-                                                            <span class="text-muted">Yearly<i class="mdi mdi-chevron-down ms-1"></i></span>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-end">
-                                                            <a class="dropdown-item" href="#">Yearly</a>
-                                                            <a class="dropdown-item" href="#">Monthly</a>
-                                                            <a class="dropdown-item" href="#">Weekly</a>
-                                                            <a class="dropdown-item" href="#">Today</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-body pt-0">
-                                                <div id="social-source" class="apex-charts"></div>
-                                                <div class="social-content text-center">
-                                                    <p class="text-uppercase mb-1">Total Sales</p>
-                                                    <h3 class="mb-0">5,685</h3>
-                                                </div>
-                                                <p class="text-muted text-center w-75 mx-auto mt-4 mb-0">Magnis dis parturient montes
-                                                    nascetur ridiculus tincidunt lobortis.</p>
-                                                <div class="row gx-4 mt-1">
-                                                    <div class="col-md-4">
-                                                        <div class="mt-4">
-                                                            <div class="progress" style="height: 7px;">
-                                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="85">
-                                                                </div>
-                                                            </div>
-                                                            <p class="text-muted mt-2 pt-2 mb-0 text-uppercase font-size-13 text-truncate">E-Commerce
-                                                            </p>
-                                                            <h4 class="mt-1 mb-0 font-size-20">52,524</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="mt-4">
-                                                            <div class="progress" style="height: 7px;">
-                                                                <div class="progress-bar bg-success" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="70">
-                                                                </div>
-                                                            </div>
-                                                            <p class="text-muted mt-2 pt-2 mb-0 text-uppercase font-size-13 text-truncate">Facebook
-                                                            </p>
-                                                            <h4 class="mt-1 mb-0 font-size-20">48,625</h4>
-                                                        </div>
-                                                    </div>
-                
-                                                    <div class="col-md-4">
-                                                        <div class="mt-4">
-                                                            <div class="progress" style="height: 7px;">
-                                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="60">
-                                                                </div>
-                                                            </div>
-                                                            <p class="text-muted mt-2 pt-2 mb-0 text-uppercase font-size-13 text-truncate">Instagram
-                                                            </p>
-                                                            <h4 class="mt-1 mb-0 font-size-20">85,745</h4>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xl-6">
-                                        <div class="card">
-                                            <div class="card-header border-0 align-items-center d-flex pb-0">
-                                                <h4 class="card-title mb-0 flex-grow-1">Sales Statistics</h4>
-                                                <div>
-                                                    <div class="dropdown">
-                                                        <a class="dropdown-toggle text-muted" href="#"
-                                                            data-bs-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                            Today<i class="mdi mdi-chevron-down ms-1"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-end">
-                                                            <a class="dropdown-item" href="#">Yearly</a>
-                                                            <a class="dropdown-item" href="#">Monthly</a>
-                                                            <a class="dropdown-item" href="#">Weekly</a>
-                                                            <a class="dropdown-item" href="#">Today</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="mb-0 mt-2">725,800</h4>
-                                                <p class="mb-0 mt-2 text-muted">
-                                                    <span class="badge badge-soft-success mb-0">
-                                                         <i class="ri-arrow-up-line align-middle"></i>
-                                                15.72 % </span> vs. previous month</p>
-
-                                                <div class="mt-3 pt-1">
-                                                    <div class="progress progress-lg rounded-pill px-0">
-                                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        <div class="progress-bar bg-success" role="progressbar" style="width: 26%" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="table-responsive mt-3">
-                                                    <table class="table align-middle table-centered table-nowrap mb-0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col">Order Status</th>
-                                                                <th scope="col">Orders</th>
-                                                                <th scope="col">Returns</th>
-                                                                <th scope="col">Earnings</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:void(0);" class="text-dark">Product Pending</a>
-                                                                </td>
-                                                                <td>17,351</td>
-                                                                <td>2,123</td>
-                                                                <td><span class="badge bg-subtle-primary text-primary font-size-11 ms-1"><i class="mdi mdi-arrow-up"></i> 45.3%</span></td>
-                                                            </tr><!-- end -->
-        
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:void(0);" class="text-dark">Product Cancelled</a>
-                                                                </td>
-                                                                <td>67,356</td>
-                                                                <td>3,652</td>
-                                                                <td><span class="badge bg-subtle-danger text-danger font-size-11 ms-1"><i class="mdi mdi-arrow-down"></i> 14.6%</span></td>
-                                                            </tr><!-- end -->
-        
-        
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:void(0);" class="text-dark">Product Delivered</a>
-                                                                </td>
-                                                                <td>67,356</td>
-                                                                <td>3,652</td>
-                                                                <td><span class="badge bg-subtle-primary text-primary font-size-11 ms-1"><i class="mdi mdi-arrow-up"></i> 14.6%</span></td>
-                                                            </tr><!-- end -->
-                                                        </tbody><!-- end tbody -->
-                                                    </table><!-- end table -->
-                                                </div>
-
-                                                <div class="text-center mt-4"><a href="javascript: void(0);" class="btn btn-primary waves-effect waves-light btn-sm">View More <i class="mdi mdi-arrow-right ms-1"></i></a></div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                   
-                                </div>
-                            </div>
-
-                            <div class="col-xl-5">
-                                <div class="card">
-                                    <div class="card-header border-0 align-items-center d-flex pb-0">
-                                        <h4 class="card-title mb-0 flex-grow-1">Top Users</h4>
-                                        <div>
-                                            <div class="dropdown">
-                                                <a class="dropdown-toggle text-reset" href="#" data-bs-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">
-                                                    <span class="fw-semibold">Sort By:</span>
-                                                    <span class="text-muted">Yearly<i class="mdi mdi-chevron-down ms-1"></i></span>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="#">Yearly</a>
-                                                    <a class="dropdown-item" href="#">Monthly</a>
-                                                    <a class="dropdown-item" href="#">Weekly</a>
-                                                    <a class="dropdown-item" href="#">Today</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-2">
-                                        <div class="table-responsive" data-simplebar style="max-height: 358px;">
-                                            <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
-                                                <tbody>
-                                                    <tr>
-                                                        <td style="width: 20px;"><img src="assets/images/users/avatar-4.jpg" class="avatar-sm rounded-circle " alt="..."></td>
-                                                        <td>
-                                                            <h6 class="font-size-15 mb-1">Glenn Holden</h6>
-                                                            <p class="text-muted mb-0 font-size-14">glennholden@tocly.com</p>
-                                                        </td>
-                                                        <td class="text-muted"><i class="mdi mdi-trending-up text-success font-size-18 align-middle me-1"></i>$250.00</td>
-                                                        <td><span class="badge badge-soft-danger font-size-12">Cancel</span></td>
-                                                        <td>
-                                                            <div class="dropdown">
-                                                                <a class="text-muted dropdown-toggle font-size-20" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                                                                    <i class="mdi mdi-dots-vertical"></i>
-                                                                </a>
-                        
-                                                                <div class="dropdown-menu dropdown-menu-end">
-                                                                    <a class="dropdown-item" href="#">Action</a>
-                                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <a class="dropdown-item" href="#">Separated link</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/images/users/avatar-5.jpg" class="avatar-sm rounded-circle " alt="..."></td>
-                                                        <td>
-                                                            <h6 class="font-size-15 mb-1">Lolita Hamill</h6>
-                                                            <p class="text-muted mb-0 font-size-14">lolitahamill@tocly.com</p>
-                                                        </td>
-                                                        <td class="text-muted"><i class="mdi mdi-trending-down text-danger font-size-18 align-middle me-1"></i>$110.00</td>
-                                                        <td><span class="badge badge-soft-success font-size-12">Success</span></td>
-                                                        <td>
-                                                            <div class="dropdown">
-                                                                <a class="text-muted dropdown-toggle font-size-20" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                                                                    <i class="mdi mdi-dots-vertical"></i>
-                                                                </a>
-                        
-                                                                <div class="dropdown-menu dropdown-menu-end">
-                                                                    <a class="dropdown-item" href="#">Action</a>
-                                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <a class="dropdown-item" href="#">Separated link</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/images/users/avatar-6.jpg" class="avatar-sm rounded-circle " alt="..."></td>
-                                                        <td>
-                                                            <h6 class="font-size-15 mb-1">Robert Mercer</h6>
-                                                            <p class="text-muted mb-0 font-size-14">robertmercer@tocly.com</p>
-                                                        </td>
-                                                        <td class="text-muted"><i class="mdi mdi-trending-up text-success font-size-18 align-middle me-1"></i>$420.00</td>
-                                                        <td><span class="badge badge-soft-info font-size-12">Active</span></td>
-                                                        <td>
-                                                            <div class="dropdown">
-                                                                <a class="text-muted dropdown-toggle font-size-20" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                                                                    <i class="mdi mdi-dots-vertical"></i>
-                                                                </a>
-                        
-                                                                <div class="dropdown-menu dropdown-menu-end">
-                                                                    <a class="dropdown-item" href="#">Action</a>
-                                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <a class="dropdown-item" href="#">Separated link</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/images/users/avatar-7.jpg" class="avatar-sm rounded-circle " alt="..."></td>
-                                                        <td>
-                                                            <h6 class="font-size-15 mb-1">Marie Kim</h6>
-                                                            <p class="text-muted mb-0 font-size-14">mariekim@tocly.com</p>
-                                                        </td>
-                                                        <td class="text-muted"><i class="mdi mdi-trending-down text-danger font-size-18 align-middle me-1"></i>$120.00</td>
-                                                        <td><span class="badge badge-soft-warning font-size-12">Pending</span></td>
-                                                        <td>
-                                                            <div class="dropdown">
-                                                                <a class="text-muted dropdown-toggle font-size-20" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                                                                    <i class="mdi mdi-dots-vertical"></i>
-                                                                </a>
-                        
-                                                                <div class="dropdown-menu dropdown-menu-end">
-                                                                    <a class="dropdown-item" href="#">Action</a>
-                                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <a class="dropdown-item" href="#">Separated link</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/images/users/avatar-8.jpg" class="avatar-sm rounded-circle " alt="..."></td>
-                                                        <td>
-                                                            <h6 class="font-size-15 mb-1">Sonya Henshaw</h6>
-                                                            <p class="text-muted mb-0 font-size-14">sonyahenshaw@tocly.com</p>
-                                                        </td>
-                                                        <td class="text-muted"><i class="mdi mdi-trending-up text-success font-size-18 align-middle me-1"></i>$112.00</td>
-                                                        <td><span class="badge badge-soft-info font-size-12">Active</span></td>
-                                                        <td>
-                                                            <div class="dropdown">
-                                                                <a class="text-muted dropdown-toggle font-size-20" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                                                                    <i class="mdi mdi-dots-vertical"></i>
-                                                                </a>
-                        
-                                                                <div class="dropdown-menu dropdown-menu-end">
-                                                                    <a class="dropdown-item" href="#">Action</a>
-                                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <a class="dropdown-item" href="#">Separated link</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/images/users/avatar-2.jpg" class="avatar-sm rounded-circle " alt="..."></td>
-                                                        <td>
-                                                            <h6 class="font-size-15 mb-1">Marie Kim</h6>
-                                                            <p class="text-muted mb-0 font-size-14">marikim@tocly.com</p>
-                                                        </td>
-                                                        <td class="text-muted"><i class="mdi mdi-trending-down text-danger font-size-18 align-middle me-1"></i>$120.00</td>
-                                                        <td><span class="badge badge-soft-success font-size-12">Success</span></td>
-                                                        <td>
-                                                            <div class="dropdown">
-                                                                <a class="text-muted dropdown-toggle font-size-20" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                                                                    <i class="mdi mdi-dots-vertical"></i>
-                                                                </a>
-                        
-                                                                <div class="dropdown-menu dropdown-menu-end">
-                                                                    <a class="dropdown-item" href="#">Action</a>
-                                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <a class="dropdown-item" href="#">Separated link</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><img src="assets/images/users/avatar-1.jpg" class="avatar-sm rounded-circle " alt="..."></td>
-                                                        <td>
-                                                            <h6 class="font-size-15 mb-1">Sonya Henshaw</h6>
-                                                            <p class="text-muted mb-0 font-size-14">sonyahenshaw@tocly.com</p>
-                                                        </td>
-                                                        <td class="text-muted"><i class="mdi mdi-trending-up text-success font-size-18 align-middle me-1"></i>$112.00</td>
-                                                        <td><span class="badge badge-soft-danger font-size-12">Cancel</span></td>
-                                                        <td>
-                                                            <div class="dropdown">
-                                                                <a class="text-muted dropdown-toggle font-size-20" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                                                                    <i class="mdi mdi-dots-vertical"></i>
-                                                                </a>
-                        
-                                                                <div class="dropdown-menu dropdown-menu-end">
-                                                                    <a class="dropdown-item" href="#">Action</a>
-                                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <a class="dropdown-item" href="#">Separated link</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div> <!-- enbd table-responsive-->
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
 
                     </div>
                     <!-- container-fluid -->
@@ -1247,12 +818,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-6">
-                                <script>document.write(new Date().getFullYear())</script> © Tocly.
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="text-sm-end d-none d-sm-block">
-                                    Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign
-                                </div>
+                                <script>document.write(new Date().getFullYear())</script> © Billboard Manager.
                             </div>
                         </div>
                     </div>
@@ -1329,14 +895,78 @@
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 
-        <!-- Vector map-->
-        <script src="assets/libs/jsvectormap/jsvectormap.min.js"></script>
-        <script src="assets/libs/jsvectormap/maps/world-merc.js"></script>
-
-        <script src="assets/js/pages/dashboard.init.js"></script>
-
         <!-- App js -->
         <script src="assets/js/app.js"></script>
+
+        <script>
+            const API_BASE = location.pathname.replace(/\/public\/DASH\/.*$/, '') + '/api';
+
+            const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+            const fmtTime = t => {
+                if (!t) return '--:--';
+                const p = String(t).split(':');
+                const h = parseInt(p[0], 10);
+                return `${h % 12 || 12}:${p[1]} ${h >= 12 ? 'PM' : 'AM'}`;
+            };
+
+            // Require login
+            fetch(`${API_BASE}/auth.php?action=check`, { credentials: 'include' })
+                .then(r => r.json())
+                .then(d => { if (!d.success) location.href = 'auth-login.html'; })
+                .catch(() => {});
+
+            fetch(`${API_BASE}/stats.php`, { credentials: 'include' })
+                .then(r => r.json())
+                .then(s => {
+                    if (!s.success) return;
+
+                    document.getElementById('statUsers').textContent = s.users;
+                    document.getElementById('statAds').textContent = s.ads_total;
+                    document.getElementById('statAdsActive').textContent = s.ads_active;
+                    document.getElementById('statDisplays').textContent = s.displays;
+                    document.getElementById('statHours').textContent = s.active_hours + ' hrs';
+
+                    // Recent announcements list
+                    const typeIcon = { text: '📝', image: '🖼️', video: '🎬' };
+                    const rows = (s.recent_ads || []).map(a => `
+                        <tr>
+                            <td style="width:36px;font-size:20px;">${typeIcon[a.ad_type] || '📄'}</td>
+                            <td>
+                                <h6 class="font-size-15 mb-1">${esc(a.title)}</h6>
+                                <p class="text-muted mb-0 font-size-13">${(a.ad_type || '').toUpperCase()} · ${a.duration || 10}s per slide</p>
+                            </td>
+                            <td class="text-muted font-size-13">${fmtTime(a.start_time)} — ${fmtTime(a.end_time)}</td>
+                            <td>${a.is_active == 1
+                                ? '<span class="badge badge-soft-success font-size-12">Active</span>'
+                                : '<span class="badge badge-soft-danger font-size-12">Inactive</span>'}</td>
+                        </tr>`).join('');
+                    document.getElementById('recentAdsBody').innerHTML =
+                        rows || '<tr><td class="text-center text-muted py-4">No announcements yet</td></tr>';
+
+                    // Column chart — how many active ads cover each hour of the day
+                    new ApexCharts(document.querySelector('#column-chart'), {
+                        chart: { type: 'bar', height: 350, toolbar: { show: false } },
+                        series: [{ name: 'Active ads on air', data: s.ads_by_hour }],
+                        xaxis: { categories: Array.from({length: 24}, (_, h) => h + 'h'), tickAmount: 12 },
+                        yaxis: { labels: { formatter: v => Math.round(v) } },
+                        colors: ['#7269ef'],
+                        plotOptions: { bar: { columnWidth: '55%', borderRadius: 3 } },
+                        dataLabels: { enabled: false },
+                        grid: { borderColor: '#f1f1f1' }
+                    }).render();
+
+                    // Donut — ads by type
+                    new ApexCharts(document.querySelector('#donut-chart'), {
+                        chart: { type: 'donut', height: 280 },
+                        series: [s.ads_by_type.text || 0, s.ads_by_type.image || 0, s.ads_by_type.video || 0],
+                        labels: ['Text', 'Image', 'Video'],
+                        colors: ['#7269ef', '#46c79e', '#f7b84b'],
+                        legend: { position: 'bottom' },
+                        dataLabels: { enabled: false }
+                    }).render();
+                })
+                .catch(err => console.error('stats error:', err));
+        </script>
     </body>
 
 
