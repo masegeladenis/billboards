@@ -1,0 +1,17 @@
+HTTrack3.49-2+htsswf+htsjava launched on Wed, 10 Jun 2026 19:39:17 at https://themesdesign.in/tocly/layouts/index.html +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" https://themesdesign.in/tocly/layouts/index.html -O1 "C:\xampp\htdocs\announcement\advDash" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+19:45:20	Error: 	"Not Found" (404) at link https://themesdesign.in/tocly/layouts/assets/css/app-dark.min.css (from https://themesdesign.in/tocly/layouts/index.html)
+19:45:34	Error: 	"Not Found" (404) at link https://themesdesign.in/tocly/layouts/pages-faqs.html (from https://themesdesign.in/tocly/layouts/layouts-horizontal.html)
+19:45:34	Warning: 	Retry after error -4 (No data (connection closed)) at link https://themesdesign.in/tocly/layouts/assets/images/comingsoon.png (from https://themesdesign.in/tocly/layouts/pages-comingsoon.html)
+19:45:34	Warning: 	Retry after error -4 (No data (connection closed)) at link https://themesdesign.in/tocly/layouts/assets/libs/magnific-popup/magnific-popup.css (from https://themesdesign.in/tocly/layouts/ui-lightbox.html)
+19:45:34	Error: 	"Not Found" (404) at link https://themesdesign.in/tocly/layouts/assets/libs/datatables.net-autoFill-bs4/css/autoFill.bootstrap4.min.css (from https://themesdesign.in/tocly/layouts/tables-editable.html)
+19:45:34	Error: 	"Not Found" (404) at link https://themesdesign.in/tocly/layouts/assets/images/authentication-bg.jpg (from https://themesdesign.in/tocly/layouts/assets/css/app-rtl.min.css)
+
+HTTrack Website Copier/3.49-2 mirror complete in 6 minutes 20 seconds : 303 links scanned, 296 files written (30136539 bytes overall) [19501867 bytes received at 51320 bytes/sec], 13989434 bytes transferred using HTTP compression in 215 files, ratio 23%, 6.3 requests per connection
+(4 errors, 2 warnings, 0 messages)

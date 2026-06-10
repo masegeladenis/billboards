@@ -1,0 +1,5 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+unicons.iconscout.com	TRUE	/	FALSE	1999999999	__cf_bm	7e5Kv41OLYQIDAChgkvnx49KrF0uZLBJDODe4DGWuEQ-1781109620.9032335-1.0.1.1-hnUmCZAZ0sMZqXwGTFq9ZNibOJ3i59Q7YCAiPJvGDuEk6kFb1xAREx2fO9kgnc7gFnxs61BMKiUBIiK1j.MSQD29EneEkhGlkuUdy1TV1D0T9y26MRKrbUngpBgvkD_l
+iconscout.com	TRUE	/	FALSE	1999999999	SameSite	None
+

@@ -1,4 +1,8 @@
 <?php
+// All ad start/end times are entered in East Africa Time — keep PHP's clock aligned
+// regardless of the server's timezone (Cloudways runs on UTC).
+date_default_timezone_set('Africa/Dar_es_Salaam');
+
 class Database {
     private $host = '161.35.43.5';
     private $db_name = 'mqfkpcnfdx';
