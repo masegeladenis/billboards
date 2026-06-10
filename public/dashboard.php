@@ -957,7 +957,14 @@
         fetch(`${API_BASE}/ads.php`, { method: 'GET', credentials: 'include' })
             .then(r => r.json())
             .then(data => {
+                console.log('ads response:', JSON.stringify(data));
                 const list = document.getElementById('adsList');
+
+                if (!data.success) {
+                    list.innerHTML = `<div class="empty-state"><div class="empty-title">API error</div><div class="empty-sub">${data.message || 'Unknown error'}</div></div>`;
+                    return;
+                }
+
                 const ads = data.ads || [];
 
                 document.getElementById('statTotal').textContent = ads.length;
