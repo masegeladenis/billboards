@@ -957,7 +957,6 @@
         fetch(`${API_BASE}/ads.php`, { method: 'GET', credentials: 'include' })
             .then(r => r.json())
             .then(data => {
-                console.log('ads response:', JSON.stringify(data));
                 const list = document.getElementById('adsList');
 
                 if (!data.success) {
@@ -981,8 +980,8 @@
                     return;
                 }
 
-                console.log('rendering', ads.length, 'ads, list el:', list ? 'found' : 'NULL');
-                list.innerHTML = ads.map(ad => {
+                list.innerHTML = '';
+                ads.forEach(ad => {
                     const hasMedia = ad.media_path && String(ad.media_path).trim() !== '';
                     const adType = ad.ad_type || 'text';
                     const typeIcon = { text: '📝', image: '🖼️', video: '🎬' }[adType] || '📄';
@@ -992,8 +991,10 @@
                             ? '<span class="badge badge-media-ok">✓ Media attached</span>'
                             : '<span class="badge badge-media-no">✕ No media</span>';
 
-                    return `
-                    <div class="ad-card" id="adcard-${ad.id}">
+                    const card = document.createElement('div');
+                    card.className = 'ad-card';
+                    card.id = 'adcard-' + ad.id;
+                    card.innerHTML = `
                         <div class="ad-card-top">
                             <div class="ad-title-row">
                                 <div class="ad-title">${escHtml(ad.title || '')}</div>
@@ -1013,10 +1014,9 @@
                                 ${ad.is_active == 1 ? '⏸ Deactivate' : '▶ Activate'}
                             </button>
                             <button class="btn-sm btn-del" onclick="confirmDelete(${ad.id})">🗑 Delete</button>
-                        </div>
-                    </div>`;
-                }).join('');
-                console.log('done rendering, cards in DOM:', document.querySelectorAll('.ad-card').length);
+                        </div>`;
+                    list.appendChild(card);
+                });
             })
             .catch(err => {
                 console.error('loadAds error:', err);
