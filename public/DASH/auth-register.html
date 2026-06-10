@@ -6,10 +6,9 @@
 <head>
         
         <meta charset="utf-8" />
-        <title>Register | Tocly - Admin & Dashboard Template</title>
+        <title>Register | Billboard Manager</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-        <meta content="Themesdesign" name="author" />
+        <meta content="Billboard Advertisement Management System" name="description" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -36,11 +35,10 @@
                             <div class="w-100">
                                 <div class="d-flex flex-column h-100 py-0 py-xl-3">
                                     <div class="text-center mb-4">
-                                        <a href="index.html" class="">
-                                            <img src="assets/images/logo-dark.png" alt="" height="22" class="auth-logo logo-dark mx-auto">
-                                            <img src="assets/images/logo-light.png" alt="" height="22" class="auth-logo logo-light mx-auto">
+                                        <a href="index.html" class="text-decoration-none">
+                                            <h3 class="fw-bold text-dark mb-0">📢 Billboard Manager</h3>
                                         </a>
-                                        <p class="text-muted mt-2">User Experience & Interface Design Strategy Saas Solution</p>
+                                        <p class="text-muted mt-2">Billboard Advertisement Management System</p>
                                     </div>
     
                                     <div class="card my-auto overflow-hidden">
@@ -56,43 +54,34 @@
                                                         <div>
                                                             <div class="text-center mt-1">
                                                                 <h4 class="font-size-18">Register account</h4>
-                                                                <p class="text-muted">Get your free Tocly account now.</p>
+                                                                <p class="text-muted">Create your Billboard Manager account.</p>
                                                             </div>
-            
-                                                            <form action="https://themesdesign.in/tocly/layouts/index.html" class="auth-input">
+
+                                                            <div class="alert alert-danger d-none" id="registerAlert" role="alert"></div>
+
+                                                            <form id="registerForm" class="auth-input">
                                                                 <div class="mb-2">
                                                                     <label for="useremail" class="form-label">Email</label>
-                                                                    <input type="email" class="form-control" id="useremail" placeholder="Enter email">
+                                                                    <input type="email" class="form-control" id="useremail" placeholder="Enter email" required>
                                                                 </div>
-                
+
                                                                 <div class="mb-2">
-                                                                    <label for="username" class="form-label">Username</label>
-                                                                    <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                                                    <label for="username" class="form-label">Full Name</label>
+                                                                    <input type="text" class="form-control" id="username" placeholder="Enter full name" required>
                                                                 </div>
-                                                        
+
+                                                                <div class="mb-2">
+                                                                    <label for="companyname" class="form-label">Company <span class="text-muted">(optional)</span></label>
+                                                                    <input type="text" class="form-control" id="companyname" placeholder="Enter company name">
+                                                                </div>
+
                                                                 <div class="mb-3">
                                                                     <label class="form-label" for="password-input">Password</label>
-                                                                    <input type="password" class="form-control" placeholder="Enter password">
+                                                                    <input type="password" class="form-control" id="password-input" placeholder="Enter password" required minlength="6">
                                                                 </div>
-                                                        
-                                                                <div>
-                                                                    <p class="mb-0">By registering you agree to the Tocly <a href="#" class="text-primary">Terms of Use</a></p>
-                                                                </div>
-                                                        
+
                                                                 <div class="mt-3">
-                                                                    <button class="btn btn-primary w-100" type="submit">Register</button>
-                                                                </div>
-                                                        
-                                                                <div class="mt-4 pt-2 text-center">
-                                                                    <div class="signin-other-title">
-                                                                        <h5 class="font-size-14 mb-4 title">Sign In with</h5>
-                                                                    </div>
-                                                                    <div class="pt-2 hstack gap-2 justify-content-center">
-                                                                        <button type="button" class="btn btn-primary btn-sm"><i class="ri-facebook-fill font-size-16"></i></button>
-                                                                        <button type="button" class="btn btn-danger btn-sm"><i class="ri-google-fill font-size-16"></i></button>
-                                                                        <button type="button" class="btn btn-dark btn-sm"><i class="ri-github-fill font-size-16"></i></button>
-                                                                        <button type="button" class="btn btn-info btn-sm"><i class="ri-twitter-fill font-size-16"></i></button>
-                                                                    </div>
+                                                                    <button class="btn btn-primary w-100" type="submit" id="registerBtn">Register</button>
                                                                 </div>
                                                               </form>
                                                         </div>
@@ -107,7 +96,7 @@
                                     <!-- end card -->
                                     
                                     <div class="mt-5 text-center">
-                                        <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> Tocly. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
+                                        <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> Billboard Manager</p>
                                     </div>
                                 </div>
                             </div>
@@ -127,9 +116,61 @@
         <script src="assets/libs/node-waves/waves.min.js"></script>
 
         <!-- Icon -->
-        <script src="../../../unicons.iconscout.com/release/v2.0.1/script/monochrome/bundle.js"></script>
+        <script src="https://unicons.iconscout.com/release/v2.0.1/script/monochrome/bundle.js"></script>
 
         <script src="assets/js/app.js"></script>
+
+        <script>
+            const API_BASE = location.pathname.replace(/\/public\/DASH\/.*$/, '') + '/api';
+
+            document.getElementById('registerForm').addEventListener('submit', async e => {
+                e.preventDefault();
+                const btn = document.getElementById('registerBtn');
+                const alertBox = document.getElementById('registerAlert');
+                alertBox.classList.add('d-none');
+                btn.disabled = true;
+                btn.textContent = 'Creating account…';
+
+                const email = document.getElementById('useremail').value;
+                const password = document.getElementById('password-input').value;
+
+                try {
+                    const res = await fetch(`${API_BASE}/auth.php`, {
+                        method: 'POST',
+                        credentials: 'include',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            email,
+                            password,
+                            name: document.getElementById('username').value,
+                            company_name: document.getElementById('companyname').value
+                        })
+                    });
+                    const data = await res.json();
+
+                    if (data.success) {
+                        // Auto-login with the new credentials, then go to the dashboard
+                        const login = await fetch(`${API_BASE}/auth.php`, {
+                            method: 'POST',
+                            credentials: 'include',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email, password })
+                        }).then(r => r.json());
+
+                        location.href = login.success ? 'index.html' : 'auth-login.html';
+                    } else {
+                        alertBox.textContent = data.message || 'Registration failed';
+                        alertBox.classList.remove('d-none');
+                    }
+                } catch {
+                    alertBox.textContent = 'Connection error. Please try again.';
+                    alertBox.classList.remove('d-none');
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Register';
+                }
+            });
+        </script>
 
     </body>
 
