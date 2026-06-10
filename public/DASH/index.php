@@ -41,21 +41,13 @@
                           <!-- LOGO -->
                         <div class="navbar-brand-box">
                             <a href="index.php" class="logo logo-dark">
-                                <span class="logo-sm">
-                                    <img src="assets/images/logo-dark.png" alt="logo-sm-dark" height="24">
-                                </span>
-                                <span class="logo-lg">
-                                    <img src="assets/images/logo-sm-dark.png" alt="logo-dark" height="25">
-                                </span>
+                                <span class="logo-sm" style="font-size:20px;">📢</span>
+                                <span class="logo-lg" style="font-size:16px;font-weight:700;color:#2b3940;">📢 Billboard Manager</span>
                             </a>
 
                             <a href="index.php" class="logo logo-light">
-                                <span class="logo-sm">
-                                    <img src="assets/images/logo-light.png" alt="logo-sm-light" height="24">
-                                </span>
-                                <span class="logo-lg">
-                                    <img src="assets/images/logo-sm-light.png" alt="logo-light" height="25">
-                                </span>
+                                <span class="logo-sm" style="font-size:20px;">📢</span>
+                                <span class="logo-lg" style="font-size:16px;font-weight:700;color:#fff;">📢 Billboard Manager</span>
                             </a>
                         </div>
 
