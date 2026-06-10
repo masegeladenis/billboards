@@ -8,20 +8,13 @@ class Database {
     public $error = null;
 
     public function connect() {
-        // Connect without selecting DB so we can create it if missing
-        $this->conn = new mysqli($this->host, $this->user, $this->password);
+        $this->conn = new mysqli($this->host, $this->user, $this->password, $this->db_name);
 
         if ($this->conn->connect_error) {
             $this->error = 'Connection Error: ' . $this->conn->connect_error;
             return null;
         }
 
-        if (!$this->conn->query("CREATE DATABASE IF NOT EXISTS `{$this->db_name}`")) {
-            $this->error = 'Database creation failed: ' . $this->conn->error;
-            return null;
-        }
-
-        $this->conn->select_db($this->db_name);
         $this->setupTables();
 
         return $this->conn;
