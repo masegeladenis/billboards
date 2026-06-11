@@ -210,6 +210,7 @@
                                                         <th scope="col">Duration</th>
                                                         <th scope="col">Status</th>
                                                         <th scope="col">Created</th>
+                                                        <th scope="col">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="adsTableBody">
@@ -324,6 +325,54 @@
         </div>
         <!-- end modal -->
 
+        <!-- Edit Announcement Modal -->
+        <div class="modal fade" id="editAdModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form id="editAdForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Announcement</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-danger d-none" id="editAdAlert" role="alert"></div>
+                            <input type="hidden" id="editId">
+
+                            <div class="mb-3">
+                                <label class="form-label" for="editTitle">Title</label>
+                                <input type="text" class="form-control" id="editTitle" required>
+                            </div>
+
+                            <div class="mb-3" id="editContentField">
+                                <label class="form-label" for="editContent">Text Content</label>
+                                <textarea class="form-control" id="editContent" rows="3"></textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="editStart">Start Time</label>
+                                    <input type="time" class="form-control" id="editStart" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="editEnd">End Time</label>
+                                    <input type="time" class="form-control" id="editEnd" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="editDuration">Seconds per Slide</label>
+                                    <input type="number" class="form-control" id="editDuration" min="3" max="300">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" id="editAdBtn">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- end edit modal -->
+
         <!-- JAVASCRIPT -->
         <script src="assets/libs/jquery/jquery.min.js"></script>
         <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -365,6 +414,15 @@
                     .then(() => location.href = 'auth-login.php');
             }
 
+            let allAds = [];
+
+            function flash(msg) {
+                const f = document.getElementById('flashMsg');
+                f.textContent = msg;
+                f.classList.remove('d-none');
+                setTimeout(() => f.classList.add('d-none'), 4000);
+            }
+
             function loadAllAds() {
                 fetch(`${API_BASE}/ads.php?all=1`, { credentials: 'include' })
                     .then(r => r.json())
@@ -372,13 +430,13 @@
                         const tb = document.getElementById('adsTableBody');
 
                         if (!data.success) {
-                            tb.innerHTML = `<tr><td colspan="8" class="text-center text-danger py-4">${esc(data.message || 'Failed to load')}</td></tr>`;
+                            tb.innerHTML = `<tr><td colspan="9" class="text-center text-danger py-4">${esc(data.message || 'Failed to load')}</td></tr>`;
                             return;
                         }
 
-                        const ads = data.ads || [];
-                        if (ads.length === 0) {
-                            tb.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-4">No announcements yet</td></tr>';
+                        allAds = data.ads || [];
+                        if (allAds.length === 0) {
+                            tb.innerHTML = '<tr><td colspan="9" class="text-center text-muted py-4">No announcements yet</td></tr>';
                             return;
                         }
 
@@ -388,7 +446,7 @@
                             video: '<span class="badge bg-subtle-warning text-warning font-size-12">🎬 VIDEO</span>'
                         };
 
-                        tb.innerHTML = ads.map((a, i) => `
+                        tb.innerHTML = allAds.map((a, i) => `
                             <tr>
                                 <td class="text-muted">${i + 1}</td>
                                 <td>
@@ -405,13 +463,103 @@
                                     ? '<span class="badge badge-soft-success font-size-12">Active</span>'
                                     : '<span class="badge badge-soft-danger font-size-12">Inactive</span>'}</td>
                                 <td class="text-muted font-size-13">${(a.created_at || '').split(' ')[0]}</td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                        <button type="button" class="btn btn-soft-primary btn-sm" onclick="openEdit(${a.id})">Edit</button>
+                                        <button type="button" class="btn ${a.is_active == 1 ? 'btn-soft-warning' : 'btn-soft-success'} btn-sm" onclick="toggleAd(${a.id})">
+                                            ${a.is_active == 1 ? 'Disable' : 'Enable'}
+                                        </button>
+                                        <button type="button" class="btn btn-soft-danger btn-sm" onclick="deleteAd(${a.id})">Delete</button>
+                                    </div>
+                                </td>
                             </tr>`).join('');
                     })
                     .catch(() => {
                         document.getElementById('adsTableBody').innerHTML =
-                            '<tr><td colspan="8" class="text-center text-danger py-4">Connection error</td></tr>';
+                            '<tr><td colspan="9" class="text-center text-danger py-4">Connection error</td></tr>';
                     });
             }
+
+            // ── Row actions ──
+            function toggleAd(id) {
+                fetch(`${API_BASE}/ads.php?id=${id}&action=toggle`, { method: 'PUT', credentials: 'include' })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success) { flash('Announcement status updated'); loadAllAds(); }
+                        else alert(data.message || 'Failed to update status');
+                    })
+                    .catch(() => alert('Connection error'));
+            }
+
+            function deleteAd(id) {
+                const ad = allAds.find(a => a.id == id);
+                if (!confirm(`Delete "${ad ? ad.title : 'this announcement'}"? This cannot be undone.`)) return;
+
+                fetch(`${API_BASE}/ads.php?id=${id}&action=delete`, { method: 'POST', credentials: 'include' })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success) { flash('Announcement deleted'); loadAllAds(); }
+                        else alert(data.message || 'Failed to delete');
+                    })
+                    .catch(() => alert('Connection error'));
+            }
+
+            function openEdit(id) {
+                const ad = allAds.find(a => a.id == id);
+                if (!ad) return;
+
+                document.getElementById('editAdAlert').classList.add('d-none');
+                document.getElementById('editId').value = ad.id;
+                document.getElementById('editTitle').value = ad.title || '';
+                document.getElementById('editContent').value = ad.content || '';
+                document.getElementById('editStart').value = (ad.start_time || '').slice(0, 5);
+                document.getElementById('editEnd').value = (ad.end_time || '').slice(0, 5);
+                document.getElementById('editDuration').value = ad.duration || 10;
+                document.getElementById('editContentField').classList.toggle('d-none', ad.ad_type !== 'text');
+
+                new bootstrap.Modal(document.getElementById('editAdModal')).show();
+            }
+
+            document.getElementById('editAdForm').addEventListener('submit', async e => {
+                e.preventDefault();
+                const editAlert = document.getElementById('editAdAlert');
+                editAlert.classList.add('d-none');
+
+                const btn = document.getElementById('editAdBtn');
+                btn.disabled = true;
+                btn.textContent = 'Saving…';
+
+                try {
+                    const id = document.getElementById('editId').value;
+                    const res = await fetch(`${API_BASE}/ads.php?id=${id}`, {
+                        method: 'PUT', credentials: 'include',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            title: document.getElementById('editTitle').value,
+                            content: document.getElementById('editContent').value,
+                            start_time: document.getElementById('editStart').value,
+                            end_time: document.getElementById('editEnd').value,
+                            duration: parseInt(document.getElementById('editDuration').value) || 10
+                        })
+                    });
+                    const data = await res.json();
+
+                    if (data.success) {
+                        bootstrap.Modal.getInstance(document.getElementById('editAdModal')).hide();
+                        flash('Announcement updated successfully');
+                        loadAllAds();
+                    } else {
+                        editAlert.textContent = data.message || 'Failed to save changes';
+                        editAlert.classList.remove('d-none');
+                    }
+                } catch {
+                    editAlert.textContent = 'Connection error. Please try again.';
+                    editAlert.classList.remove('d-none');
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Save Changes';
+                }
+            });
 
             loadAllAds();
 

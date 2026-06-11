@@ -95,16 +95,16 @@ class Advertisement {
         return $result->num_rows > 0 ? $result->fetch_assoc() : null;
     }
 
-    public function updateAd($id, $user_id, $title, $description, $ad_type, $content, $media_path, $start_time, $end_time, $rotation_order = 1) {
+    public function updateAd($id, $user_id, $title, $ad_type, $content, $media_path, $start_time, $end_time, $duration = 10) {
         if (!$this->conn) return ['success' => false, 'message' => 'Database connection failed'];
 
         $query = "UPDATE {$this->table}
-                  SET title = ?, ad_type = ?, content = ?, media_path = ?, start_time = ?, end_time = ?
+                  SET title = ?, ad_type = ?, content = ?, media_path = ?, start_time = ?, end_time = ?, duration = ?
                   WHERE id = ? AND user_id = ?";
 
         $stmt = $this->conn->prepare($query);
         if (!$stmt) return ['success' => false, 'message' => $this->conn->error];
-        $stmt->bind_param('ssssssii', $title, $ad_type, $content, $media_path, $start_time, $end_time, $id, $user_id);
+        $stmt->bind_param('ssssssiii', $title, $ad_type, $content, $media_path, $start_time, $end_time, $duration, $id, $user_id);
 
         if ($stmt->execute()) return ['success' => true, 'message' => 'Advertisement updated successfully'];
         return ['success' => false, 'message' => $stmt->error];

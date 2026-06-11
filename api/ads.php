@@ -39,13 +39,13 @@ if ($request_method === 'POST' && $action === 'delete' && $ad_id) {
     $ad = new Advertisement();
     $existing = $ad->getAdById($ad_id);
 
-    if (!$existing || $existing['user_id'] != $user_id) {
-        http_response_code(403);
-        echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+    if (!$existing) {
+        http_response_code(404);
+        echo json_encode(['success' => false, 'message' => 'Advertisement not found']);
         exit;
     }
 
-    $result = $ad->deleteAd($ad_id, $user_id);
+    $result = $ad->deleteAd($ad_id, $existing['user_id']);
     http_response_code($result['success'] ? 200 : 400);
     echo json_encode($result);
 
@@ -152,13 +152,13 @@ if ($request_method === 'POST' && $action === 'delete' && $ad_id) {
     $ad = new Advertisement();
     $existing = $ad->getAdById($ad_id);
 
-    if (!$existing || $existing['user_id'] != $user_id) {
-        http_response_code(403);
-        echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+    if (!$existing) {
+        http_response_code(404);
+        echo json_encode(['success' => false, 'message' => 'Advertisement not found']);
         exit;
     }
 
-    $result = $ad->toggleActive($ad_id, $user_id);
+    $result = $ad->toggleActive($ad_id, $existing['user_id']);
     http_response_code($result['success'] ? 200 : 400);
     echo json_encode($result);
 
@@ -169,23 +169,22 @@ if ($request_method === 'POST' && $action === 'delete' && $ad_id) {
     $ad = new Advertisement();
     $existing = $ad->getAdById($ad_id);
 
-    if (!$existing || $existing['user_id'] != $user_id) {
-        http_response_code(403);
-        echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+    if (!$existing) {
+        http_response_code(404);
+        echo json_encode(['success' => false, 'message' => 'Advertisement not found']);
         exit;
     }
 
     $result = $ad->updateAd(
         $ad_id,
-        $user_id,
+        $existing['user_id'],
         $data['title'] ?? $existing['title'],
-        $data['description'] ?? $existing['description'],
         $data['ad_type'] ?? $existing['ad_type'],
         $data['content'] ?? $existing['content'],
         $data['media_path'] ?? $existing['media_path'],
         $data['start_time'] ?? $existing['start_time'],
         $data['end_time'] ?? $existing['end_time'],
-        $data['rotation_order'] ?? $existing['rotation_order']
+        intval($data['duration'] ?? $existing['duration'] ?? 10)
     );
 
     http_response_code($result['success'] ? 200 : 400);
