@@ -525,6 +525,12 @@
                 const editAlert = document.getElementById('editAdAlert');
                 editAlert.classList.add('d-none');
 
+                if (document.getElementById('editEnd').value <= document.getElementById('editStart').value) {
+                    editAlert.textContent = 'End time must be after start time (e.g. 08:00 to 21:00)';
+                    editAlert.classList.remove('d-none');
+                    return;
+                }
+
                 const btn = document.getElementById('editAdBtn');
                 btn.disabled = true;
                 btn.textContent = 'Saving…';
@@ -620,6 +626,10 @@
                 if (type === 'text' && !content) return showAdError('Please enter the text content');
                 if (type !== 'text' && !file)    return showAdError(`Please choose a ${type} file to upload`);
                 if (!days.length)                return showAdError('Please select at least one day');
+
+                const startVal = document.getElementById('adStart').value;
+                const endVal = document.getElementById('adEnd').value;
+                if (endVal <= startVal) return showAdError('End time must be after start time (e.g. 08:00 to 21:00)');
 
                 const btn = document.getElementById('createAdBtn');
                 btn.disabled = true;
