@@ -334,37 +334,42 @@
 
                             <li>
                                 <a href="index.php" class="waves-effect">
-                                    <i class="uim uim-airplay"></i>
+                                    <i class="uim uim-airplay"></i><span class="badge rounded-pill bg-success float-end" id="menuActiveBadge"></span>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="announcements.php" class="waves-effect">
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="uim uim-comment-message"></i>
                                     <span>Announcements</span>
                                 </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="announcements.php">All Announcements</a></li>
+                                    <li><a href="announcements.php?create=1">Create Announcement</a></li>
+                                </ul>
                             </li>
 
-                            <li>
-                                <a href="../dashboard.php" class="waves-effect">
-                                    <i class="uim uim-box"></i>
-                                    <span>Create Announcement</span>
-                                </a>
-                            </li>
+                            <li class="menu-title">Billboard</li>
 
                             <li>
                                 <a href="../display.php" target="_blank" class="waves-effect">
                                     <i class="uim uim-window-grid"></i>
-                                    <span>Billboard Display</span>
+                                    <span>Live Display</span>
                                 </a>
                             </li>
 
+                            <li class="menu-title">Account</li>
+
                             <li>
-                                <a href="javascript:appLogout();" class="waves-effect">
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="uim uim-sign-in-alt"></i>
-                                    <span>Logout</span>
+                                    <span>Authentication</span>
                                 </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="auth-recoverpw.php">Reset Password</a></li>
+                                    <li><a href="javascript:appLogout();">Logout</a></li>
+                                </ul>
                             </li>
 
                         </ul>
@@ -781,6 +786,7 @@
                     document.getElementById('statAdsActive').textContent = s.ads_active;
                     document.getElementById('statDisplays').textContent = s.displays;
                     document.getElementById('statHours').textContent = s.active_hours + ' hrs';
+                    document.getElementById('menuActiveBadge').textContent = s.ads_active;
 
                     // Top users
                     const tu = document.getElementById('topUsersBody');

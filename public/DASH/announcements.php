@@ -115,31 +115,36 @@
                             </li>
 
                             <li class="mm-active">
-                                <a href="announcements.php" class="waves-effect active">
+                                <a href="javascript: void(0);" class="has-arrow waves-effect active">
                                     <i class="uim uim-comment-message"></i>
                                     <span>Announcements</span>
                                 </a>
+                                <ul class="sub-menu mm-show" aria-expanded="true">
+                                    <li class="mm-active"><a href="announcements.php" class="active">All Announcements</a></li>
+                                    <li><a href="announcements.php?create=1">Create Announcement</a></li>
+                                </ul>
                             </li>
 
-                            <li>
-                                <a href="../dashboard.php" class="waves-effect">
-                                    <i class="uim uim-box"></i>
-                                    <span>Create Announcement</span>
-                                </a>
-                            </li>
+                            <li class="menu-title">Billboard</li>
 
                             <li>
                                 <a href="../display.php" target="_blank" class="waves-effect">
                                     <i class="uim uim-window-grid"></i>
-                                    <span>Billboard Display</span>
+                                    <span>Live Display</span>
                                 </a>
                             </li>
 
+                            <li class="menu-title">Account</li>
+
                             <li>
-                                <a href="javascript:appLogout();" class="waves-effect">
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="uim uim-sign-in-alt"></i>
-                                    <span>Logout</span>
+                                    <span>Authentication</span>
                                 </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="auth-recoverpw.php">Reset Password</a></li>
+                                    <li><a href="javascript:appLogout();">Logout</a></li>
+                                </ul>
                             </li>
 
                         </ul>
@@ -188,10 +193,11 @@
                                     <div class="card-header border-0 align-items-center d-flex pb-0">
                                         <h4 class="card-title mb-0 flex-grow-1">All Announcements</h4>
                                         <div>
-                                            <a href="../dashboard.php" class="btn btn-primary btn-sm">+ Create Announcement</a>
+                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createAdModal">+ Create Announcement</button>
                                         </div>
                                     </div>
                                     <div class="card-body">
+                                        <div class="alert alert-success d-none" id="flashMsg"></div>
                                         <div class="table-responsive">
                                             <table class="table align-middle table-centered table-nowrap mb-0">
                                                 <thead>
@@ -237,6 +243,86 @@
 
         </div>
         <!-- END layout-wrapper -->
+
+        <!-- Create Announcement Modal -->
+        <div class="modal fade" id="createAdModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <form id="createAdForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create Announcement</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-danger d-none" id="createAdAlert" role="alert"></div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="adTitle">Title</label>
+                                <input type="text" class="form-control" id="adTitle" placeholder="e.g. Church Event" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label d-block">Type</label>
+                                <div class="btn-group" role="group">
+                                    <input type="radio" class="btn-check" name="adType" id="typeText" value="text" checked>
+                                    <label class="btn btn-outline-primary" for="typeText">&#128221; Text</label>
+                                    <input type="radio" class="btn-check" name="adType" id="typeImage" value="image">
+                                    <label class="btn btn-outline-primary" for="typeImage">&#128444;&#65039; Image</label>
+                                    <input type="radio" class="btn-check" name="adType" id="typeVideo" value="video">
+                                    <label class="btn btn-outline-primary" for="typeVideo">&#127916; Video</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3" id="contentField">
+                                <label class="form-label" for="adContent">Text Content</label>
+                                <textarea class="form-control" id="adContent" rows="3" placeholder="The text shown on the billboard"></textarea>
+                            </div>
+
+                            <div class="mb-3 d-none" id="mediaField">
+                                <label class="form-label" for="adMedia">Media File</label>
+                                <input type="file" class="form-control" id="adMedia">
+                                <div class="progress mt-2 d-none" id="uploadProgressWrap" style="height: 6px;">
+                                    <div class="progress-bar bg-primary" id="uploadProgressBar" role="progressbar" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="adStart">Start Time</label>
+                                    <input type="time" class="form-control" id="adStart" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="adEnd">End Time</label>
+                                    <input type="time" class="form-control" id="adEnd" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="adDuration">Seconds per Slide</label>
+                                    <input type="number" class="form-control" id="adDuration" value="10" min="3" max="300">
+                                </div>
+                            </div>
+
+                            <div class="mb-1">
+                                <label class="form-label d-block">Days</label>
+                                <div id="adDays">
+                                    <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="adDay" value="Monday" id="dayMon" checked><label class="form-check-label" for="dayMon">Mon</label></div>
+                                    <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="adDay" value="Tuesday" id="dayTue" checked><label class="form-check-label" for="dayTue">Tue</label></div>
+                                    <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="adDay" value="Wednesday" id="dayWed" checked><label class="form-check-label" for="dayWed">Wed</label></div>
+                                    <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="adDay" value="Thursday" id="dayThu" checked><label class="form-check-label" for="dayThu">Thu</label></div>
+                                    <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="adDay" value="Friday" id="dayFri" checked><label class="form-check-label" for="dayFri">Fri</label></div>
+                                    <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="adDay" value="Saturday" id="daySat" checked><label class="form-check-label" for="daySat">Sat</label></div>
+                                    <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="adDay" value="Sunday" id="daySun" checked><label class="form-check-label" for="daySun">Sun</label></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" id="createAdBtn">Create Announcement</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- end modal -->
 
         <!-- JAVASCRIPT -->
         <script src="assets/libs/jquery/jquery.min.js"></script>
@@ -328,6 +414,115 @@
             }
 
             loadAllAds();
+
+            // Auto-open the modal when arriving via "Create Announcement" menu link
+            if (new URLSearchParams(location.search).get('create') === '1') {
+                new bootstrap.Modal(document.getElementById('createAdModal')).show();
+            }
+
+            // ── Create Announcement modal ──
+            const adAlert = document.getElementById('createAdAlert');
+            const showAdError = msg => { adAlert.textContent = msg; adAlert.classList.remove('d-none'); };
+
+            document.querySelectorAll('input[name="adType"]').forEach(radio => {
+                radio.addEventListener('change', () => {
+                    const isText = radio.value === 'text';
+                    document.getElementById('contentField').classList.toggle('d-none', !isText);
+                    document.getElementById('mediaField').classList.toggle('d-none', isText);
+                });
+            });
+
+            function uploadMedia(file) {
+                return new Promise((resolve, reject) => {
+                    const fd = new FormData();
+                    fd.append('file', file);
+
+                    const wrap = document.getElementById('uploadProgressWrap');
+                    const bar = document.getElementById('uploadProgressBar');
+                    wrap.classList.remove('d-none');
+                    bar.style.width = '0%';
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.upload.addEventListener('progress', e => {
+                        if (e.lengthComputable) bar.style.width = Math.round(e.loaded / e.total * 100) + '%';
+                    });
+                    xhr.addEventListener('load', () => {
+                        wrap.classList.add('d-none');
+                        try {
+                            const data = JSON.parse(xhr.responseText);
+                            data.success ? resolve(data.file_path) : reject(new Error(data.message || 'Upload failed'));
+                        } catch { reject(new Error('Upload failed')); }
+                    });
+                    xhr.addEventListener('error', () => { wrap.classList.add('d-none'); reject(new Error('Upload failed')); });
+                    xhr.open('POST', `${API_BASE}/upload.php`);
+                    xhr.withCredentials = true;
+                    xhr.send(fd);
+                });
+            }
+
+            document.getElementById('createAdForm').addEventListener('submit', async e => {
+                e.preventDefault();
+                adAlert.classList.add('d-none');
+
+                const type = document.querySelector('input[name="adType"]:checked').value;
+                const days = Array.from(document.querySelectorAll('input[name="adDay"]:checked')).map(el => el.value);
+                const content = document.getElementById('adContent').value.trim();
+                const file = document.getElementById('adMedia').files[0];
+
+                if (type === 'text' && !content) return showAdError('Please enter the text content');
+                if (type !== 'text' && !file)    return showAdError(`Please choose a ${type} file to upload`);
+                if (!days.length)                return showAdError('Please select at least one day');
+
+                const btn = document.getElementById('createAdBtn');
+                btn.disabled = true;
+                btn.textContent = 'Creating…';
+
+                try {
+                    let media_path = null;
+                    if (type !== 'text') {
+                        btn.textContent = 'Uploading…';
+                        media_path = await uploadMedia(file);
+                        btn.textContent = 'Creating…';
+                    }
+
+                    const res = await fetch(`${API_BASE}/ads.php`, {
+                        method: 'POST', credentials: 'include',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            title: document.getElementById('adTitle').value,
+                            ad_type: type,
+                            content: type === 'text' ? content : '',
+                            media_path,
+                            start_time: document.getElementById('adStart').value,
+                            end_time: document.getElementById('adEnd').value,
+                            duration: parseInt(document.getElementById('adDuration').value) || 10,
+                            days
+                        })
+                    });
+                    const data = await res.json();
+
+                    if (data.success) {
+                        bootstrap.Modal.getInstance(document.getElementById('createAdModal')).hide();
+                        document.getElementById('createAdForm').reset();
+                        document.getElementById('contentField').classList.remove('d-none');
+                        document.getElementById('mediaField').classList.add('d-none');
+
+                        const flash = document.getElementById('flashMsg');
+                        flash.textContent = 'Announcement created successfully!';
+                        flash.classList.remove('d-none');
+                        setTimeout(() => flash.classList.add('d-none'), 4000);
+
+                        loadAllAds();
+                    } else {
+                        showAdError(data.message || 'Failed to create announcement');
+                    }
+                } catch (err) {
+                    showAdError(err.message || 'Connection error. Please try again.');
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Create Announcement';
+                }
+            });
         </script>
 
     </body>
