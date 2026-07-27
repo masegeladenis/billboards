@@ -44,11 +44,30 @@ try {
     $active_ads = [];
 }
 
+// ?test=1 renders sample text announcements (one word, headline, long paragraph)
+// so the auto-fit sizing can be checked without touching the database.
+if (isset($_GET['test'])) {
+    $active_ads = [
+        ['id' => 9001, 'ad_type' => 'text', 'duration' => 6,
+         'title' => 'SALE', 'content' => ''],
+        ['id' => 9002, 'ad_type' => 'text', 'duration' => 6,
+         'title' => 'Grand Opening Tomorrow',
+         'content' => 'Doors open at 9:00 AM — free entry all day.'],
+        ['id' => 9003, 'ad_type' => 'text', 'duration' => 6,
+         'title' => 'Scheduled Maintenance Notice',
+         'content' => 'The water supply along Mikocheni B and the surrounding streets will be interrupted on Saturday from 8:00 AM until 4:00 PM while the main pipeline is replaced. Residents are advised to store enough water in advance. We apologise for the inconvenience and thank you for your patience.'],
+        ['id' => 9004, 'ad_type' => 'text', 'duration' => 6,
+         'title' => 'Antidisestablishmentarianism',
+         'content' => 'Tests wrapping of an unbreakably long single word.'],
+    ];
+}
+
 $display_id = isset($_GET['id']) ? intval($_GET['id']) : (count($active_ads) > 0 ? $active_ads[0]['id'] : null);
 $current_ad = null;
+$start_index = 0;
 
-foreach ($active_ads as $a) {
-    if ($a['id'] == $display_id) { $current_ad = $a; break; }
+foreach (array_values($active_ads) as $i => $a) {
+    if ($a['id'] == $display_id) { $current_ad = $a; $start_index = $i; break; }
 }
 if (!$current_ad && count($active_ads) > 0) $current_ad = $active_ads[0];
 ?>
@@ -107,7 +126,7 @@ if (!$current_ad && count($active_ads) > 0) $current_ad = $active_ads[0];
         }
 
         .slide.text-slide {
-            padding: 40px;
+            padding: 0;
         }
 
         .slide.active {
@@ -115,26 +134,41 @@ if (!$current_ad && count($active_ads) > 0) $current_ad = $active_ads[0];
             pointer-events: auto;
         }
 
-        /* Text ad */
+        /* Text ad — fills the entire billboard, no floating card */
         .text-ad {
-            max-width: 82%;
+            width: 100%;
+            height: 100%;
             text-align: center;
         }
 
         .text-ad-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* generous but proportional safe area so nothing touches the edge */
+            padding: 4vmin 5vmin;
             background: linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(139,92,246,0.12) 100%);
-            border: 1px solid rgba(99,102,241,0.3);
-            border-radius: 24px;
-            padding: 64px 56px;
-            backdrop-filter: blur(10px);
+        }
+
+        /* JS sets font-size on .text-fit; children scale from it in em */
+        .text-fit {
+            width: 100%;
+            font-size: 100px;
+            line-height: 1;
         }
 
         .text-ad h2 {
-            font-size: clamp(2rem, 5vw, 4.5rem);
+            font-size: 1em;
             font-weight: 800;
-            letter-spacing: -1px;
-            line-height: 1.1;
-            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+            /* break-word only splits words that can't fit a line on their own,
+               so normal words still wrap whole */
+            overflow-wrap: break-word;
+            text-wrap: balance;
             background: linear-gradient(135deg, #fff 0%, #c7d2fe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -142,11 +176,17 @@ if (!$current_ad && count($active_ads) > 0) $current_ad = $active_ads[0];
         }
 
         .text-ad p {
-            font-size: clamp(1.1rem, 2.5vw, 2rem);
+            font-size: 0.42em;
             font-weight: 400;
-            color: rgba(255,255,255,0.8);
-            line-height: 1.5;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.35;
+            margin-top: 0.6em;
+            overflow-wrap: break-word;
+            text-wrap: pretty;
         }
+
+        /* Title-only announcements get the whole canvas */
+        .text-ad p:empty { display: none; }
 
         /* Image ad */
         .image-ad {
@@ -251,7 +291,8 @@ if (!$current_ad && count($active_ads) > 0) $current_ad = $active_ads[0];
 
 <script>
     const ads = <?php echo json_encode(array_values($active_ads)); ?>;
-    let current = 0;
+    // ?id=N starts the rotation on that ad instead of the first one
+    let current = <?php echo (int)$start_index; ?>;
     let rotateTimer = null;
 
     function escHtml(s) {
@@ -264,11 +305,14 @@ if (!$current_ad && count($active_ads) > 0) $current_ad = $active_ads[0];
 
         if (ad.ad_type === 'text') {
             div.className = 'slide text-slide';
+            const content = (ad.content || '').trim();
             div.innerHTML = `
                 <div class="text-ad">
                     <div class="text-ad-inner">
-                        <h2>${escHtml(ad.title)}</h2>
-                        <p>${escHtml(ad.content || '')}</p>
+                        <div class="text-fit">
+                            <h2>${escHtml(ad.title)}</h2>
+                            ${content ? `<p>${escHtml(content)}</p>` : ''}
+                        </div>
                     </div>
                 </div>`;
         } else if (ad.ad_type === 'image') {
@@ -282,6 +326,74 @@ if (!$current_ad && count($active_ads) > 0) $current_ad = $active_ads[0];
                 </video>`;
         }
         return div;
+    }
+
+    // Largest base font-size at which every word still fits on one line, so the
+    // text never gets chopped mid-word. Text width scales linearly with
+    // font-size, so one measurement at a 100px base gives the ratio.
+    function maxSizeWithWholeWords(fit, availW) {
+        const prev = fit.style.fontSize;
+        fit.style.fontSize = '100px';
+
+        let cap = Infinity;
+        for (const el of fit.children) {
+            const prevW = el.style.width;
+            // min-content = width of the longest word at this size
+            el.style.width = 'min-content';
+            const w = el.getBoundingClientRect().width;
+            el.style.width = prevW;
+            if (w > 0) cap = Math.min(cap, availW * 100 / w);
+        }
+
+        fit.style.fontSize = prev;
+        return cap;
+    }
+
+    // Grow the text until it fills the billboard, then stop just before it
+    // overflows. Binary search keeps this to ~18 reflows per pass.
+    function fitText(slide) {
+        const box = slide.querySelector('.text-ad-inner');
+        const fit = slide.querySelector('.text-fit');
+        if (!box || !fit) return;
+
+        const cs     = getComputedStyle(box);
+        const availW = box.clientWidth  - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+        const availH = box.clientHeight - parseFloat(cs.paddingTop)  - parseFloat(cs.paddingBottom);
+        if (availW <= 0 || availH <= 0) return;
+
+        const ceilW = Math.ceil(availW);
+        const search = (upper) => {
+            let lo = 8, hi = Math.max(lo, upper), best = lo;
+            for (let i = 0; i < 18 && hi - lo > 0.5; i++) {
+                const mid = (lo + hi) / 2;
+                fit.style.fontSize = mid + 'px';
+                if (fit.scrollHeight <= availH && fit.scrollWidth <= ceilW) {
+                    best = mid;
+                    lo = mid;
+                } else {
+                    hi = mid;
+                }
+            }
+            return best;
+        };
+
+        const roomiest = Math.max(40, availH);
+        let best = search(roomiest);
+
+        // If that size would split a word, retry with whole words enforced —
+        // but keep the bigger broken-word size when the compromise is drastic
+        // (a 40-character word can't be shown whole and still be readable).
+        const cap = maxSizeWithWholeWords(fit, availW);
+        if (best > cap) {
+            const whole = search(Math.min(roomiest, cap));
+            if (whole >= best * 0.6) best = whole;
+        }
+
+        fit.style.fontSize = best + 'px';
+    }
+
+    function fitAllText() {
+        document.querySelectorAll('.slide.text-slide').forEach(fitText);
     }
 
     function init() {
@@ -301,8 +413,14 @@ if (!$current_ad && count($active_ads) > 0) $current_ad = $active_ads[0];
         }
 
         ads.forEach(ad => wrap.appendChild(buildSlide(ad)));
-        showAd(0);
+        fitAllText();
+        // Inter loads async — remeasure once the real font metrics are in
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAllText);
+        showAd(current);
     }
+
+    // Rotation, screen resize and orientation changes all need a remeasure
+    window.addEventListener('resize', fitAllText);
 
     function showAd(index) {
         clearTimeout(rotateTimer);
@@ -311,7 +429,10 @@ if (!$current_ad && count($active_ads) > 0) $current_ad = $active_ads[0];
 
         const ad = ads[index];
         const slide = document.getElementById('slide-' + ad.id);
-        if (slide) slide.classList.add('active');
+        if (slide) {
+            slide.classList.add('active');
+            if (slide.classList.contains('text-slide')) fitText(slide);
+        }
 
 
         if (ads.length > 1) {
